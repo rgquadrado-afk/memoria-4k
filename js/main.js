@@ -42,6 +42,18 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // HIDDEN ADMIN ACCESS EGG
+  let secretClicks = 0;
+  const logoSecret = document.querySelector('.navbar__logo-icon');
+  if (logoSecret) {
+    logoSecret.addEventListener('click', () => {
+      secretClicks++;
+      if (secretClicks === 5) {
+        window.location.href = 'admin.html';
+      }
+    });
+  }
+
   // 3. DETAILS PAGE RENDERING (If we are on detalhe.html)
   const detailContainer = document.getElementById('detail-content');
   if (detailContainer && typeof getPackageById !== 'undefined') {
