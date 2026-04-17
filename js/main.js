@@ -87,9 +87,28 @@ document.addEventListener("DOMContentLoaded", () => {
       thumbContainer.appendChild(thumb);
     });
 
-    // Pricing Logic
+    // Pricing Logic dynamically populated
     const type = item.type; // 'ensaio' ou 'restauracao'
     const prices = packagePricing[type];
+    
+    const qtyContainer = document.getElementById('qty-container');
+    const qtys = Object.keys(prices); // ["3", "5", "10"] etc.
+    
+    let qtyHtml = '';
+    qtys.forEach((q, index) => {
+      const isChecked = index === 0 ? 'checked' : '';
+      qtyHtml += `
+        <label class="qty-option">
+          <input type="radio" name="qty" value="${q}" ${isChecked}>
+          <div class="qty-label">
+            <div class="qty-number">${q}</div>
+            <div class="qty-text">${q == 1 ? 'Foto' : 'Fotos'}</div>
+          </div>
+        </label>
+      `;
+    });
+    qtyContainer.innerHTML = qtyHtml;
+
     const qtyInputs = document.querySelectorAll('input[name="qty"]');
     const priceDisplay = document.getElementById('total-price');
     const btnWpp = document.getElementById('btn-wpp-checkout');
@@ -103,9 +122,8 @@ document.addEventListener("DOMContentLoaded", () => {
       const formattedTotal = total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
       priceDisplay.textContent = formattedTotal;
 
-      // Monta Link WhatsApp
-      // Ex: "Olá! Gostaria de solicitar o pacote *[NOME DO PACOTE]* com *[QUANTIDADE]* foto(s). Valor total: R$ [VALOR]. Aguardo instruções para pagamento e envio das fotos."
-      const text = `Olá! Gostaria de solicitar o pacote *${item.title}* com *${selectedQty}* foto(s). Valor total: ${formattedTotal}. Aguardo instruções para pagamento e envio das fotos.`;
+      // Monta Link WhatsApp - FASE 3 FORMATO EXATO
+      const text = `Olá! Gostaria do pacote *${item.title}* com *${selectedQty}* fotos. Valor: ${formattedTotal}. Aguardo instruções.`;
       btnWpp.href = `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
     }
 
@@ -127,6 +145,7 @@ function createCardHTML(item, delay) {
     : `<img src="${item.placeholderImg}" alt="${item.title}" loading="lazy">`;
 
   return `
+    <!-- PROMPT_IMAGEM: ${item.aiPrompt} -->
     <div class="catalog-card reveal" style="transition-delay: ${delay}s;">
       <div class="catalog-card__img-wrap">
         ${imgContent}

@@ -3,98 +3,105 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Painel Admin — Memória 4K</title>
+  <title>Oficina (Painel Admin) — Memória 4K</title>
   
-  <!-- Fontes -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
   
   <link rel="stylesheet" href="css/style.css">
   <style>
-    /* Estilos específicos do painel para evitar inchar a folha principal do site só para admin */
-    .status-badge {
-      display: inline-block;
-      padding: 4px 8px;
-      border-radius: 4px;
-      font-size: 11px;
-      font-weight: 600;
-      text-transform: uppercase;
-    }
+    .status-badge { display: inline-block; padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; text-transform: uppercase; }
     .status-pendente { background: rgba(212,136,90,0.2); color: var(--amber); }
-    .status-processando { background: rgba(168,216,200,0.2); color: var(--pale-teal); }
     .status-concluido { background: rgba(37,211,102,0.2); color: var(--success); }
+    
+    .privacy-notice { background: rgba(217, 83, 79, 0.1); border: 1px solid rgba(217, 83, 79, 0.3); padding: 12px; border-radius: 8px; font-size: 13px; color: #ff8c8a; margin-bottom: 24px; display: flex; align-items: flex-start; gap: 8px;}
+    
+    .thumb-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(60px, 1fr)); gap: 8px; margin-top: 12px;}
+    .thumb-grid img { width: 100%; height: 60px; object-fit: cover; border-radius: 4px; border: 1px solid rgba(255,255,255,0.2);}
+    
+    .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(4px); z-index: 9999; align-items: center; justify-content: center; padding: 20px;}
+    .modal.active { display: flex; }
+    .modal-content { background: var(--dark-bg); border: 1px solid rgba(255,255,255,0.1); padding: 32px; border-radius: 16px; width: 100%; max-width: 600px; max-height: 90vh; overflow-y: auto;}
+    .modal-close { float: right; background: none; border: none; color: white; font-size: 24px; cursor: pointer;}
   </style>
 </head>
-<body class="dark-mode"> <!-- Admin é sempre versão dark -->
+<body class="dark-mode">
 
-  <!-- NAVBAR SIMPLES -->
   <nav class="navbar" style="position: absolute;">
-    <div class="navbar__logo">
-      <div class="navbar__logo-icon">✦</div>
-      Admin | Memória 4K
-    </div>
-    <a href="index.html" class="navbar__cta" style="background: transparent; color: white; border: 1px solid rgba(255,255,255,0.2);">
-      Sair
-    </a>
+    <div class="navbar__logo"><div class="navbar__logo-icon">✦</div> Oficina | Memória 4K</div>
+    <a href="index.html" class="navbar__cta" style="background: transparent; color: white; border: 1px solid rgba(255,255,255,0.2);">Sair</a>
   </nav>
 
   <main class="container admin-layout">
     
-    <!-- TELA DE LOGIN -->
+    <!-- LOGIN -->
     <div id="admin-login-view" class="admin-glass">
-      <h2 style="font-family: var(--font-display); margin-bottom: 24px;">Autenticação</h2>
+      <h2 style="font-family: var(--font-display); margin-bottom: 24px;">Oficina Restrita</h2>
       <form id="login-form">
         <div class="form-group">
           <label>Senha de Acesso</label>
           <input type="password" id="admin-pass" class="form-control" autocomplete="off" required>
         </div>
         <p id="login-error" style="color: var(--error); font-size: 12px; margin-bottom: 16px; display: none;">Senha incorreta.</p>
-        <button type="submit" class="btn-admin">Entrar</button>
+        <button type="submit" class="btn-admin">Autenticar</button>
       </form>
     </div>
 
-    <!-- PAINEL ADMINISTRATIVO (Inicia oculto) -->
+    <!-- DASHBOARD -->
     <div id="admin-dashboard-view" class="hidden">
-      <h1 class="page-title" style="text-align: left; font-size: 40px; margin-bottom: 40px;">Gestão de <em>Pedidos</em></h1>
+      
+      <div class="privacy-notice">
+        <span>⚠️</span>
+        <div>
+          <strong>Atenção à Privacidade:</strong> Todas as fotos enviadas pelos clientes são armazenadas exclusivamente de forma <b>local</b> no disco rígido do dispositivo atual através de IndexedDB, simulando a segurança criptográfica. <b>Nunca enviaremos fotos em base64 não criptografada para servidores externos.</b> É seu dever Apagar/Concluir o pedido após o tratamento para expurgar as imagens locais.
+        </div>
+      </div>
+
+      <h1 class="page-title" style="text-align: left; font-size: 36px; margin-bottom: 32px;">Gestor de <em>Pedidos</em></h1>
 
       <div class="admin-grid">
-        <!-- Coluna Esquerda: Novo Pedido -->
+        <!-- Esquerda: Formulário Novo Pedido -->
         <div class="admin-sidebar">
           <div class="admin-glass">
-            <h3 style="margin-bottom: 20px; font-size: 18px;">Criar Pedido Manual</h3>
+            <h3 style="margin-bottom: 20px; font-size: 18px;">Ingressar Novo Pedido</h3>
             <form id="form-novo-pedido">
               <div class="form-group">
                 <label>Nome do Cliente</label>
                 <input type="text" id="p-cliente" class="form-control" required>
               </div>
               <div class="form-group">
-                <label>Pacote (ID)</label>
-                <select id="p-pacote" class="form-control" required>
-                  <!-- Opções serão preenchidas via JS -->
+                <label>WhatsApp</label>
+                <input type="text" id="p-wpp" class="form-control" placeholder="11999999999" required>
+              </div>
+              <div class="form-group">
+                <label>Pacote Selecionado</label>
+                <select id="p-pacote" class="form-control" required></select>
+              </div>
+              <div class="form-group">
+                <label>Quantidade de Fotos do Combo</label>
+                <select id="p-qtd" class="form-control" required>
+                  <option value="3">3 Fotos (Ensaio/Rest)</option>
+                  <option value="5">5 Fotos (Ensaio/Rest)</option>
+                  <option value="10">10 Fotos (Ensaio)</option>
+                  <option value="1">1 Foto (Restauração)</option>
                 </select>
               </div>
               <div class="form-group">
-                <label>Quantidade</label>
-                <select id="p-qtd" class="form-control" required>
-                  <option value="1">1 Foto</option>
-                  <option value="3">3 Fotos</option>
-                  <option value="5">5 Fotos</option>
-                </select>
+                <label>Upload de Fotos Base (Mín 4 un.)</label>
+                <input type="file" id="p-fotos" class="form-control" accept=".jpg,.jpeg,.png" multiple required style="background: transparent; padding:0; border: none; margin-top:5px;">
+                <p style="font-size: 11px; margin-top:4px; color:var(--text-on-dark-muted)">As fotos não farão upload para nuvem. Ficam retidas localmente.</p>
               </div>
-              <button type="submit" class="btn-admin" style="margin-top: 10px;">Adicionar Pedido</button>
+              <div class="form-group" style="display:flex; align-items:flex-start; gap:8px;">
+                <input type="checkbox" id="p-aviso" required>
+                <label for="p-aviso" style="line-height:1.2; margin:0">O cliente foi devidamente avisado que as fotos serão apagadas após a entrega.</label>
+              </div>
+              <button type="submit" class="btn-admin" id="btn-submit-pedido" style="margin-top: 10px;">Adicionar Pedido</button>
             </form>
-          </div>
-
-          <div class="admin-glass">
-            <h3 style="margin-bottom: 16px; font-size: 18px;">Prompt para Nano Banana</h3>
-            <p style="font-size: 12px; color: var(--text-on-dark-muted); margin-bottom: 10px;">Selecione um pedido na tabela para gerar o prompt.</p>
-            <textarea id="prompt-displayer" class="form-control" readonly placeholder="O prompt aparecerá aqui..."></textarea>
-            <button class="btn-admin" id="btn-copy-prompt" style="margin-top: 10px; background: var(--teal-blue);">Copiar Prompt</button>
           </div>
         </div>
 
-        <!-- Coluna Direita: Tabela de Pedidos -->
+        <!-- Direita: Tabela -->
         <div class="admin-main">
           <div class="admin-glass" style="padding: 0; overflow: hidden;">
             <div class="table-wrapper">
@@ -104,14 +111,11 @@
                     <th>ID</th>
                     <th>Cliente</th>
                     <th>Pacote</th>
-                    <th>Qtd.</th>
                     <th>Status</th>
                     <th>Ações</th>
                   </tr>
                 </thead>
-                <tbody id="pedidos-body">
-                  <!-- JS populando... -->
-                </tbody>
+                <tbody id="pedidos-body"></tbody>
               </table>
             </div>
           </div>
@@ -120,149 +124,202 @@
     </div>
   </main>
 
+  <!-- MODAL NANO BANANA -->
+  <div class="modal" id="modal-banana">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeModal()">×</button>
+      <h3 style="margin-bottom: 8px;">Área de Prompt (Nano Banana)</h3>
+      <p style="font-size: 13px; color:var(--text-on-dark-muted); margin-bottom: 24px;">Abra o Nano Banana, cole este prompt na primeira aba e anexe as miniaturas mostradas abaixo.</p>
+      
+      <textarea id="prompt-displayer" class="form-control" readonly style="height: 140px; margin-bottom: 16px; background: rgba(0,0,0,0.5);"></textarea>
+      
+      <button class="btn-admin" id="btn-copy-prompt" style="background: var(--teal-blue); margin-bottom: 24px;">Copiar Prompt Completo</button>
+
+      <h4 style="font-size: 14px; margin-bottom: 8px;">Mídia do Cliente para Anexo:</h4>
+      <div class="thumb-grid" id="modal-thumbs"></div>
+      
+      <div style="margin-top: 32px; padding-top: 16px; border-top: 1px dashed rgba(255,255,255,0.2); text-align: right;">
+        <button class="btn-admin" id="btn-concluir-pedido" style="background: #25D366; width: auto;">Concluir Pedido e Expurgar Fotos</button>
+      </div>
+    </div>
+  </div>
+
   <script src="js/data.js"></script>
   <script>
+    const passCorrect = "memoria4k2026";
+    let db;
+    let selectedPedidoId = null;
+
+    // --- IndexedDB Wrapper ---
+    const request = indexedDB.open("Memoria4K_DB_Fase3", 1);
+    request.onupgradeneeded = (e) => {
+      db = e.target.result;
+      if (!db.objectStoreNames.contains('pedidos')) {
+        db.createObjectStore('pedidos', { keyPath: 'id', autoIncrement: true });
+      }
+    };
+    request.onsuccess = (e) => {
+      db = e.target.result;
+    };
+
     document.addEventListener("DOMContentLoaded", () => {
-      const passCorrect = "memoria4k2026";
-      const loginView = document.getElementById('admin-login-view');
-      const dashView = document.getElementById('admin-dashboard-view');
-      const loginForm = document.getElementById('login-form');
-      const loginError = document.getElementById('login-error');
-      
-      // 1. MÓDULO DE AUTENTICAÇÃO (Simulada)
-      loginForm.addEventListener('submit', (e) => {
+      // Auth
+      document.getElementById('login-form').addEventListener('submit', (e) => {
         e.preventDefault();
-        const pass = document.getElementById('admin-pass').value;
-        if(pass === passCorrect) {
-          loginView.classList.add('hidden');
-          dashView.classList.remove('hidden');
+        if(document.getElementById('admin-pass').value === passCorrect) {
+          document.getElementById('admin-login-view').classList.add('hidden');
+          document.getElementById('admin-dashboard-view').classList.remove('hidden');
           initDashboard();
         } else {
-          loginError.style.display = 'block';
+          document.getElementById('login-error').style.display = 'block';
         }
       });
+    });
 
-      // 2. MÓDULO DE DADOS (localStorage)
-      let pedidos = JSON.parse(localStorage.getItem('m4k_pedidos')) || [];
+    function initDashboard() {
+      // Popula pacotes
+      const select = document.getElementById('p-pacote');
+      [...catalogData.tematicos, ...catalogData.restauracao].forEach(p => {
+        const opt = document.createElement('option');
+        opt.value = p.id;
+        opt.textContent = p.title;
+        select.appendChild(opt);
+      });
+      refreshTable();
+    }
 
-      function savePedidos() {
-        localStorage.setItem('m4k_pedidos', JSON.stringify(pedidos));
-        renderTable();
-      }
-
-      function initDashboard() {
-        // Popula select de pacotes
-        const selectPacotes = document.getElementById('p-pacote');
-        const todosPacotes = [...catalogData.tematicos, ...catalogData.restauracao];
-        todosPacotes.forEach(p => {
-          const opt = document.createElement('option');
-          opt.value = p.id;
-          opt.textContent = p.title;
-          selectPacotes.appendChild(opt);
-        });
-
-        // Add dummy data for first view if empty
-        if(pedidos.length === 0) {
-          pedidos.push({ id: 1001, cliente: 'João Silva', pacoteId: 'disney_magica', pacoteNome: 'Disney Mágica', qtd: 3, status: 'Pendente' });
-          pedidos.push({ id: 1002, cliente: 'Maria Clara', pacoteId: 'tapete_vermelho', pacoteNome: 'Tapete Vermelho', qtd: 1, status: 'Processando' });
-          savePedidos();
-        } else {
-          renderTable();
-        }
-      }
-
-      // 3. MÓDULO DE INTERFACE
-      const tbody = document.getElementById('pedidos-body');
-
-      function renderTable() {
+    function refreshTable() {
+      const tx = db.transaction('pedidos', 'readonly');
+      const req = tx.objectStore('pedidos').getAll();
+      req.onsuccess = () => {
+        const tbody = document.getElementById('pedidos-body');
         tbody.innerHTML = '';
-        pedidos.forEach(p => {
-          const tr = document.createElement('tr');
-          
-          let statusClass = 'status-pendente';
-          if(p.status === 'Processando') statusClass = 'status-processando';
-          if(p.status === 'Concluído') statusClass = 'status-concluido';
+        const pedidos = req.result;
+        
+        if (pedidos.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; padding: 24px; color: gray;">Nenhum pedido na oficina.</td></tr>';
+          return;
+        }
 
+        pedidos.forEach(p => {
+          const statusClass = p.status === 'Concluído' ? 'status-concluido' : 'status-pendente';
+          const tr = document.createElement('tr');
           tr.innerHTML = `
             <td>#${p.id}</td>
             <td style="font-weight: 500;">${p.cliente}</td>
-            <td>${p.pacoteNome}</td>
-            <td>${p.qtd}</td>
+            <td>${p.pacoteNome} (${p.qtd}X)</td>
             <td><span class="status-badge ${statusClass}">${p.status}</span></td>
             <td>
-              <button class="action-btn btn-gerar" data-id="${p.id}">Gerar Prompt</button>
+              ${p.status === 'Pendente' 
+                ? `<button class="action-btn" onclick="openModal(${p.id})">Gerar Prompt / Mídia</button>`
+                : `<span style="font-size:11px; opacity:0.5">- Expurgado -</span>`
+              }
             </td>
           `;
           tbody.appendChild(tr);
         });
+      };
+    }
 
-        // Re-atacha listeners pros botões Gerar
-        document.querySelectorAll('.btn-gerar').forEach(btn => {
-          btn.addEventListener('click', (e) => {
-            const pedidoId = parseInt(e.target.dataset.id);
-            gerarPrompt(pedidoId);
-          });
-        });
+    // Formulário Novo Pedido
+    document.getElementById('form-novo-pedido').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const files = document.getElementById('p-fotos').files;
+      if (files.length < 4) {
+        alert("O sistema necessita de no mínimo 4 fotos (ângulos) do cliente.");
+        return;
       }
+      const btn = document.getElementById('btn-submit-pedido');
+      btn.textContent = "Processando B64...";
+      btn.disabled = true;
 
-      // Action: Novo Pedido
-      document.getElementById('form-novo-pedido').addEventListener('submit', (e) => {
-        e.preventDefault();
-        const cliente = document.getElementById('p-cliente').value;
-        const pacoteSelect = document.getElementById('p-pacote');
-        const pacoteId = pacoteSelect.value;
-        const pacoteNome = pacoteSelect.options[pacoteSelect.selectedIndex].text;
-        const qtd = document.getElementById('p-qtd').value;
-
-        const novoId = pedidos.length > 0 ? Math.max(...pedidos.map(p => p.id)) + 1 : 1000;
-        
-        pedidos.push({
-          id: novoId,
-          cliente,
-          pacoteId,
-          pacoteNome,
-          qtd,
-          status: 'Pendente'
+      const funcsBase64 = Array.from(files).map(file => {
+        return new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = e => resolve(e.target.result);
+          reader.onerror = e => reject(e);
+          reader.readAsDataURL(file);
         });
-
-        savePedidos();
-        e.target.reset(); // limpa form
       });
+      const fotosB64 = await Promise.all(funcsBase64);
+      
+      const selectPacote = document.getElementById('p-pacote');
+      const itemCatalogo = getPackageById(selectPacote.value);
 
-      // 4. MÓDULO DE GERAÇÃO DE PROMPT (Nano Banana)
-      function gerarPrompt(pedidoId) {
-        const pedido = pedidos.find(p => p.id === pedidoId);
-        if(!pedido) return;
+      const novoPedido = {
+        cliente: document.getElementById('p-cliente').value,
+        wpp: document.getElementById('p-wpp').value,
+        pacoteId: selectPacote.value,
+        pacoteNome: selectPacote.options[selectPacote.selectedIndex].text,
+        qtd: document.getElementById('p-qtd').value,
+        status: 'Pendente',
+        fotosBase64: fotosB64,
+        aiPrompt: itemCatalogo.aiPrompt
+      };
 
-        // Configuração lógica baseada no HM-Engineer guide (estruturado e padronizado)
-        const base = `Retrato de ${pedido.cliente} no estilo ${pedido.pacoteNome}.`;
-        const rostoInstr = `Incluir o rosto da pessoa nas posições [FOTO 1 referente].`;
-        const techInstr = `Qualidade Ultra 4K, iluminação editorial cinematográfica, alta nitidez, fotorealismo impecável, renderizado em Unreal Engine 5 aesthetic.`;
-        
-        // Contextos dinâmicos baseados no pacote (mocked basic logic for MVP)
-        let contextoEspecial = "Fundo conforme o tema estabelecido.";
-        if(pedido.pacoteId === 'disney_magica') contextoEspecial = "Fundo mostrando um icônico castelo de conto de fadas ao por do sol, com poeira mágica (sparkles).";
-        if(pedido.pacoteId === 'cyberpunk_neon') contextoEspecial = "Cidade futurista chuvosa, luzes de neon magenta e cyan, cyber-implantes rústicos.";
+      const tx = db.transaction('pedidos', 'readwrite');
+      tx.objectStore('pedidos').add(novoPedido);
+      tx.oncomplete = () => {
+        btn.textContent = "Adicionar Pedido";
+        btn.disabled = false;
+        document.getElementById('form-novo-pedido').reset();
+        refreshTable();
+      };
+    });
 
-        const promptFinal = `${base} ${rostoInstr} ${contextoEspecial} ${techInstr}`;
+    // Lógica do Modal
+    function openModal(id) {
+      selectedPedidoId = id;
+      const tx = db.transaction('pedidos', 'readonly');
+      tx.objectStore('pedidos').get(id).onsuccess = (e) => {
+        const p = e.target.result;
+        if(!p) return;
         
-        document.getElementById('prompt-displayer').value = promptFinal;
-        
-        // Opcional: Atualiza o status automaticamente ao gerar o prompt para simular workflow
-        if(pedido.status === 'Pendente') {
-          pedido.status = 'Processando';
-          savePedidos();
+        let promptText = p.aiPrompt || "Prompt não definido no data.js";
+        const instr = `--- PROMPT NANO BANANA ---\n\nTARGET PERSON: Cliente ${p.cliente}\n\n[PROMPT DE GERAÇÃO]:\n${promptText} [Utilize modelo de base fotorrealista]\n\n[INSTRUÇÃO DE LORA/FACE SWAP]:\nBaseado nas ${p.fotosBase64.length} imagens em anexo, transfira a identidade facial com 100% de semelhança orgânica.\n[QTD DE SAÍDAS ESTIPULADAS]: ${p.qtd}`;
+        document.getElementById('prompt-displayer').value = instr;
+
+        const grid = document.getElementById('modal-thumbs');
+        grid.innerHTML = '';
+        if(p.fotosBase64) {
+          p.fotosBase64.forEach(b64 => {
+            const img = document.createElement('img');
+            img.src = b64;
+            grid.appendChild(img);
+          });
+        }
+        document.getElementById('modal-banana').classList.add('active');
+      };
+    }
+
+    function closeModal() {
+      document.getElementById('modal-banana').classList.remove('active');
+      selectedPedidoId = null;
+    }
+
+    document.getElementById('btn-copy-prompt').addEventListener('click', () => {
+      const ta = document.getElementById('prompt-displayer');
+      ta.select();
+      document.execCommand('copy');
+      alert("Prompt copiado!");
+    });
+
+    document.getElementById('btn-concluir-pedido').addEventListener('click', () => {
+      if(!selectedPedidoId) return;
+      if(confirm("Confirmar a conclusão do pedido fará a exclusão segura e IMBURKÁVEL de todas as imagens Base64 armazenadas no banco de memória IndexDB no cliente local. Prosseguir?")) {
+        const tx = db.transaction('pedidos', 'readwrite');
+        const store = tx.objectStore('pedidos');
+        store.get(selectedPedidoId).onsuccess = (e) => {
+          const p = e.target.result;
+          p.status = 'Concluído';
+          p.fotosBase64 = null; // expurga memoria
+          store.put(p);
+        };
+        tx.oncomplete = () => {
+          closeModal();
+          refreshTable();
         }
       }
-
-      // Copiar Prompt Area
-      document.getElementById('btn-copy-prompt').addEventListener('click', () => {
-        const textArea = document.getElementById('prompt-displayer');
-        textArea.select();
-        document.execCommand('copy');
-        alert("Prompt copiado para a área de transferência!");
-      });
-
     });
   </script>
 </body>
