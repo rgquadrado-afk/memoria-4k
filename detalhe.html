@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detalhes do Pacote — Memória 4K</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  
+  <!-- Fontes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  
+  <!-- CSS Global (Pluma Design System) -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="navbar__logo">
+      <div class="navbar__logo-icon">✦</div>
+      Memória 4K
+    </div>
+    <ul class="navbar__links">
+      <li><a href="index.html">Início</a></li>
+      <li><a href="index.html#catalogo">Catálogo</a></li>
+    </ul>
+    <a href="index.html" class="navbar__cta" style="background: transparent; color: white; border: 1px solid rgba(255,255,255,0.2);">
+      Voltar
+    </a>
+  </nav>
+
+  <!-- HEADER -->
+  <header class="page-header">
+    <div class="container reveal">
+      <h1 class="page-title" id="detail-title">Carregando...</h1>
+      <p class="page-subtitle">Experiência Ultra 4K com qualidade cinematográfica.</p>
+    </div>
+  </header>
+
+  <!-- DETAIL MAIN CONTENT -->
+  <main class="container detail-layout" id="detail-content">
+    
+    <!-- Left: Gallery -->
+    <div class="detail-gallery reveal" style="transition-delay: 0.1s;">
+      <img src="" alt="Imagem Principal" id="main-gallery-img" class="detail-main-img">
+      <div class="detail-thumbs" id="thumb-container">
+        <!-- Thumbs will be injected here via JS -->
+      </div>
+    </div>
+
+    <!-- Right: Info & Pricing -->
+    <div class="detail-info reveal" style="transition-delay: 0.2s;">
+      <h2>Sobre a experiência</h2>
+      <p class="detail-description" id="detail-desc">
+        Carregando detalhes do ensaio...
+      </p>
+
+      <!-- Calculator Box -->
+      <div class="calculator-box">
+        <h3 class="calc-title">Selecione a quantidade de fotos</h3>
+        
+        <div class="qty-selector">
+          <label class="qty-option">
+            <input type="radio" name="qty" value="1" checked>
+            <div class="qty-label">
+              <div class="qty-number">1</div>
+              <div class="qty-text">Foto</div>
+            </div>
+          </label>
+          <label class="qty-option">
+            <input type="radio" name="qty" value="3">
+            <div class="qty-label">
+              <div class="qty-number">3</div>
+              <div class="qty-text">Fotos</div>
+            </div>
+          </label>
+          <label class="qty-option">
+            <input type="radio" name="qty" value="5">
+            <div class="qty-label">
+              <div class="qty-number">5</div>
+              <div class="qty-text">Fotos</div>
+            </div>
+          </label>
+        </div>
+
+        <div class="price-display">
+          <span class="label">Total investido:</span>
+          <span class="value" id="total-price">R$ 0,00</span>
+        </div>
+
+        <a href="#" id="btn-wpp-checkout" class="btn-primary" target="_blank" rel="noopener">
+          Solicitar Orçamento no WhatsApp
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <!-- JAVASCRIPT -->
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+
+</body>
+</html>

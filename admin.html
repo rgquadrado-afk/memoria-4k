@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Painel Admin — Memória 4K</title>
+  
+  <!-- Fontes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* Estilos específicos do painel para evitar inchar a folha principal do site só para admin */
+    .status-badge {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+    .status-pendente { background: rgba(212,136,90,0.2); color: var(--amber); }
+    .status-processando { background: rgba(168,216,200,0.2); color: var(--pale-teal); }
+    .status-concluido { background: rgba(37,211,102,0.2); color: var(--success); }
+  </style>
+</head>
+<body class="dark-mode"> <!-- Admin é sempre versão dark -->
+
+  <!-- NAVBAR SIMPLES -->
+  <nav class="navbar" style="position: absolute;">
+    <div class="navbar__logo">
+      <div class="navbar__logo-icon">✦</div>
+      Admin | Memória 4K
+    </div>
+    <a href="index.html" class="navbar__cta" style="background: transparent; color: white; border: 1px solid rgba(255,255,255,0.2);">
+      Sair
+    </a>
+  </nav>
+
+  <main class="container admin-layout">
+    
+    <!-- TELA DE LOGIN -->
+    <div id="admin-login-view" class="admin-glass">
+      <h2 style="font-family: var(--font-display); margin-bottom: 24px;">Autenticação</h2>
+      <form id="login-form">
+        <div class="form-group">
+          <label>Senha de Acesso</label>
+          <input type="password" id="admin-pass" class="form-control" autocomplete="off" required>
+        </div>
+        <p id="login-error" style="color: var(--error); font-size: 12px; margin-bottom: 16px; display: none;">Senha incorreta.</p>
+        <button type="submit" class="btn-admin">Entrar</button>
+      </form>
+    </div>
+
+    <!-- PAINEL ADMINISTRATIVO (Inicia oculto) -->
+    <div id="admin-dashboard-view" class="hidden">
+      <h1 class="page-title" style="text-align: left; font-size: 40px; margin-bottom: 40px;">Gestão de <em>Pedidos</em></h1>
+
+      <div class="admin-grid">
+        <!-- Coluna Esquerda: Novo Pedido -->
+        <div class="admin-sidebar">
+          <div class="admin-glass">
+            <h3 style="margin-bottom: 20px; font-size: 18px;">Criar Pedido Manual</h3>
+            <form id="form-novo-pedido">
+              <div class="form-group">
+                <label>Nome do Cliente</label>
+                <input type="text" id="p-cliente" class="form-control" required>
+              </div>
+              <div class="form-group">
+                <label>Pacote (ID)</label>
+                <select id="p-pacote" class="form-control" required>
+                  <!-- Opções serão preenchidas via JS -->
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Quantidade</label>
+                <select id="p-qtd" class="form-control" required>
+                  <option value="1">1 Foto</option>
+                  <option value="3">3 Fotos</option>
+                  <option value="5">5 Fotos</option>
+                </select>
+              </div>
+              <button type="submit" class="btn-admin" style="margin-top: 10px;">Adicionar Pedido</button>
+            </form>
+          </div>
+
+          <div class="admin-glass">
+            <h3 style="margin-bottom: 16px; font-size: 18px;">Prompt para Nano Banana</h3>
+            <p style="font-size: 12px; color: var(--text-on-dark-muted); margin-bottom: 10px;">Selecione um pedido na tabela para gerar o prompt.</p>
+            <textarea id="prompt-displayer" class="form-control" readonly placeholder="O prompt aparecerá aqui..."></textarea>
+            <button class="btn-admin" id="btn-copy-prompt" style="margin-top: 10px; background: var(--teal-blue);">Copiar Prompt</button>
+          </div>
+        </div>
+
+        <!-- Coluna Direita: Tabela de Pedidos -->
+        <div class="admin-main">
+          <div class="admin-glass" style="padding: 0; overflow: hidden;">
+            <div class="table-wrapper">
+              <table id="tabela-pedidos">
+                <thead style="background: rgba(0,0,0,0.2);">
+                  <tr>
+                    <th>ID</th>
+                    <th>Cliente</th>
+                    <th>Pacote</th>
+                    <th>Qtd.</th>
+                    <th>Status</th>
+                    <th>Ações</th>
+                  </tr>
+                </thead>
+                <tbody id="pedidos-body">
+                  <!-- JS populando... -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/data.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const passCorrect = "memoria4k2026";
+      const loginView = document.getElementById('admin-login-view');
+      const dashView = document.getElementById('admin-dashboard-view');
+      const loginForm = document.getElementById('login-form');
+      const loginError = document.getElementById('login-error');
+      
+      // 1. MÓDULO DE AUTENTICAÇÃO (Simulada)
+      loginForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const pass = document.getElementById('admin-pass').value;
+        if(pass === passCorrect) {
+          loginView.classList.add('hidden');
+          dashView.classList.remove('hidden');
+          initDashboard();
+        } else {
+          loginError.style.display = 'block';
+        }
+      });
+
+      // 2. MÓDULO DE DADOS (localStorage)
+      let pedidos = JSON.parse(localStorage.getItem('m4k_pedidos')) || [];
+
+      function savePedidos() {
+        localStorage.setItem('m4k_pedidos', JSON.stringify(pedidos));
+        renderTable();
+      }
+
+      function initDashboard() {
+        // Popula select de pacotes
+        const selectPacotes = document.getElementById('p-pacote');
+        const todosPacotes = [...catalogData.tematicos, ...catalogData.restauracao];
+        todosPacotes.forEach(p => {
+          const opt = document.createElement('option');
+          opt.value = p.id;
+          opt.textContent = p.title;
+          selectPacotes.appendChild(opt);
+        });
+
+        // Add dummy data for first view if empty
+        if(pedidos.length === 0) {
+          pedidos.push({ id: 1001, cliente: 'João Silva', pacoteId: 'disney_magica', pacoteNome: 'Disney Mágica', qtd: 3, status: 'Pendente' });
+          pedidos.push({ id: 1002, cliente: 'Maria Clara', pacoteId: 'tapete_vermelho', pacoteNome: 'Tapete Vermelho', qtd: 1, status: 'Processando' });
+          savePedidos();
+        } else {
+          renderTable();
+        }
+      }
+
+      // 3. MÓDULO DE INTERFACE
+      const tbody = document.getElementById('pedidos-body');
+
+      function renderTable() {
+        tbody.innerHTML = '';
+        pedidos.forEach(p => {
+          const tr = document.createElement('tr');
+          
+          let statusClass = 'status-pendente';
+          if(p.status === 'Processando') statusClass = 'status-processando';
+          if(p.status === 'Concluído') statusClass = 'status-concluido';
+
+          tr.innerHTML = `
+            <td>#${p.id}</td>
+            <td style="font-weight: 500;">${p.cliente}</td>
+            <td>${p.pacoteNome}</td>
+            <td>${p.qtd}</td>
+            <td><span class="status-badge ${statusClass}">${p.status}</span></td>
+            <td>
+              <button class="action-btn btn-gerar" data-id="${p.id}">Gerar Prompt</button>
+            </td>
+          `;
+          tbody.appendChild(tr);
+        });
+
+        // Re-atacha listeners pros botões Gerar
+        document.querySelectorAll('.btn-gerar').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            const pedidoId = parseInt(e.target.dataset.id);
+            gerarPrompt(pedidoId);
+          });
+        });
+      }
+
+      // Action: Novo Pedido
+      document.getElementById('form-novo-pedido').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const cliente = document.getElementById('p-cliente').value;
+        const pacoteSelect = document.getElementById('p-pacote');
+        const pacoteId = pacoteSelect.value;
+        const pacoteNome = pacoteSelect.options[pacoteSelect.selectedIndex].text;
+        const qtd = document.getElementById('p-qtd').value;
+
+        const novoId = pedidos.length > 0 ? Math.max(...pedidos.map(p => p.id)) + 1 : 1000;
+        
+        pedidos.push({
+          id: novoId,
+          cliente,
+          pacoteId,
+          pacoteNome,
+          qtd,
+          status: 'Pendente'
+        });
+
+        savePedidos();
+        e.target.reset(); // limpa form
+      });
+
+      // 4. MÓDULO DE GERAÇÃO DE PROMPT (Nano Banana)
+      function gerarPrompt(pedidoId) {
+        const pedido = pedidos.find(p => p.id === pedidoId);
+        if(!pedido) return;
+
+        // Configuração lógica baseada no HM-Engineer guide (estruturado e padronizado)
+        const base = `Retrato de ${pedido.cliente} no estilo ${pedido.pacoteNome}.`;
+        const rostoInstr = `Incluir o rosto da pessoa nas posições [FOTO 1 referente].`;
+        const techInstr = `Qualidade Ultra 4K, iluminação editorial cinematográfica, alta nitidez, fotorealismo impecável, renderizado em Unreal Engine 5 aesthetic.`;
+        
+        // Contextos dinâmicos baseados no pacote (mocked basic logic for MVP)
+        let contextoEspecial = "Fundo conforme o tema estabelecido.";
+        if(pedido.pacoteId === 'disney_magica') contextoEspecial = "Fundo mostrando um icônico castelo de conto de fadas ao por do sol, com poeira mágica (sparkles).";
+        if(pedido.pacoteId === 'cyberpunk_neon') contextoEspecial = "Cidade futurista chuvosa, luzes de neon magenta e cyan, cyber-implantes rústicos.";
+
+        const promptFinal = `${base} ${rostoInstr} ${contextoEspecial} ${techInstr}`;
+        
+        document.getElementById('prompt-displayer').value = promptFinal;
+        
+        // Opcional: Atualiza o status automaticamente ao gerar o prompt para simular workflow
+        if(pedido.status === 'Pendente') {
+          pedido.status = 'Processando';
+          savePedidos();
+        }
+      }
+
+      // Copiar Prompt Area
+      document.getElementById('btn-copy-prompt').addEventListener('click', () => {
+        const textArea = document.getElementById('prompt-displayer');
+        textArea.select();
+        document.execCommand('copy');
+        alert("Prompt copiado para a área de transferência!");
+      });
+
+    });
+  </script>
+</body>
+</html>
