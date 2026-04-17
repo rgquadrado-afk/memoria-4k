@@ -60,7 +60,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Populate the detail page
-    document.getElementById('detail-title').innerHTML = `<em>${item.title.split(' ')[0]}</em> ${item.title.substring(item.title.indexOf(' ') + 1)}`;
+    const spaceIndex = item.title.indexOf(' ');
+    if (spaceIndex !== -1) {
+      document.getElementById('detail-title').innerHTML = `<em>${item.title.substring(0, spaceIndex)}</em> ${item.title.substring(spaceIndex + 1)}`;
+    } else {
+      document.getElementById('detail-title').innerHTML = `<em>${item.title}</em>`;
+    }
     document.getElementById('detail-desc').textContent = item.fullDesc;
     
     // Gallery
