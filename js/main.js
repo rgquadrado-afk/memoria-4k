@@ -1,30 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // 1. SCROLL REVEAL OBSERVER
-  const textElements = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1 });
-
-  textElements.forEach(el => observer.observe(el));
-
-  // 2. NAVBAR SCROLL EFFECT
-  const navbar = document.querySelector('.navbar');
-  if (navbar) {
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 50) {
-        navbar.classList.add('scrolled');
-      } else {
-        navbar.classList.remove('scrolled');
-      }
-    });
-  }
-
-  // 3. CATALOG RENDERING (If we are on index.html)
+  // 1. CATALOG RENDERING (If we are on index.html)
   const gridTematicos = document.getElementById('grid-tematicos');
   const gridRestauracao = document.getElementById('grid-restauracao');
 
@@ -42,7 +17,32 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // 4. DETAILS PAGE RENDERING (If we are on detalhe.html)
+  // 2. SCROLL REVEAL OBSERVER
+  const textElements = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  textElements.forEach(el => observer.observe(el));
+
+  // NAVBAR SCROLL EFFECT
+  const navbar = document.querySelector('.navbar');
+  if (navbar) {
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
+  }
+
+  // 3. DETAILS PAGE RENDERING (If we are on detalhe.html)
   const detailContainer = document.getElementById('detail-content');
   if (detailContainer && typeof getPackageById !== 'undefined') {
     const params = new URLSearchParams(window.location.search);
@@ -121,12 +121,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Helper Function: Generates HTML string for a catalog card
 function createCardHTML(item, delay) {
-  // If it's a URL, use straight img tag. Otherwise keep placeholder structure if wanted, 
-  // but for simplicity we assume the placeholder is an image source now based on our data.js
+  const isExternalImg = item.placeholderImg.startsWith('http');
+  const imgContent = isExternalImg 
+    ? `<div class="catalog-card__placeholder" style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:linear-gradient(135deg, var(--forest-deep), var(--teal-blue)); color:#FFF; font-family:var(--font-display); font-style:italic; font-size:20px; text-shadow:0 2px 12px rgba(0,0,0,0.3);"><span>✦ ${item.title}</span></div>`
+    : `<img src="${item.placeholderImg}" alt="${item.title}" loading="lazy">`;
+
   return `
     <div class="catalog-card reveal" style="transition-delay: ${delay}s;">
       <div class="catalog-card__img-wrap">
-        <img src="${item.placeholderImg}" alt="${item.title}" loading="lazy">
+        ${imgContent}
       </div>
       <div class="catalog-card__body">
         <h3 class="catalog-card__title">${item.title}</h3>
