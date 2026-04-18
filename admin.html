@@ -1,15 +1,15 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Oficina (Painel Admin) — Memória 4K</title>
+  <title>Oficina (Painel Admin) â€” MemÃ³ria 4K</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
   
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css?v=1776527311,44916">
   <style>
     .status-badge { display: inline-block; padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; text-transform: uppercase; }
     .status-pendente { background: rgba(212,136,90,0.2); color: var(--amber); }
@@ -29,7 +29,7 @@
 <body class="dark-mode">
 
   <nav class="navbar" style="position: absolute;">
-    <div class="navbar__logo"><div class="navbar__logo-icon">✦</div> Oficina | Memória 4K</div>
+    <div class="navbar__logo"><div class="navbar__logo-icon">âœ¦</div> Oficina | MemÃ³ria 4K</div>
     <a href="index.html" class="navbar__cta" style="background: transparent; color: white; border: 1px solid rgba(255,255,255,0.2);">Sair</a>
   </nav>
 
@@ -52,16 +52,16 @@
     <div id="admin-dashboard-view" class="hidden">
       
       <div class="privacy-notice">
-        <span>⚠️</span>
+        <span>âš ï¸</span>
         <div>
-          <strong>Atenção à Privacidade:</strong> Todas as fotos enviadas pelos clientes são armazenadas exclusivamente de forma <b>local</b> no disco rígido do dispositivo atual através de IndexedDB, simulando a segurança criptográfica. <b>Nunca enviaremos fotos em base64 não criptografada para servidores externos.</b> É seu dever Apagar/Concluir o pedido após o tratamento para expurgar as imagens locais.
+          <strong>AtenÃ§Ã£o Ã  Privacidade:</strong> Todas as fotos enviadas pelos clientes sÃ£o armazenadas exclusivamente de forma <b>local</b> no disco rÃ­gido do dispositivo atual atravÃ©s de IndexedDB, simulando a seguranÃ§a criptogrÃ¡fica. <b>Nunca enviaremos fotos em base64 nÃ£o criptografada para servidores externos.</b> Ã‰ seu dever Apagar/Concluir o pedido apÃ³s o tratamento para expurgar as imagens locais.
         </div>
       </div>
 
       <h1 class="page-title" style="text-align: left; font-size: 36px; margin-bottom: 32px;">Gestor de <em>Pedidos</em></h1>
 
       <div class="admin-grid">
-        <!-- Esquerda: Formulário Novo Pedido -->
+        <!-- Esquerda: FormulÃ¡rio Novo Pedido -->
         <div class="admin-sidebar">
           <div class="admin-glass">
             <h3 style="margin-bottom: 20px; font-size: 18px;">Ingressar Novo Pedido</h3>
@@ -84,17 +84,17 @@
                   <option value="3">3 Fotos (Ensaio/Rest)</option>
                   <option value="5">5 Fotos (Ensaio/Rest)</option>
                   <option value="10">10 Fotos (Ensaio)</option>
-                  <option value="1">1 Foto (Restauração)</option>
+                  <option value="1">1 Foto (RestauraÃ§Ã£o)</option>
                 </select>
               </div>
               <div class="form-group">
-                <label>Upload de Fotos Base (Mín 4 un.)</label>
+                <label>Upload de Fotos Base (MÃ­n 4 un.)</label>
                 <input type="file" id="p-fotos" class="form-control" accept=".jpg,.jpeg,.png" multiple required style="background: transparent; padding:0; border: none; margin-top:5px;">
-                <p style="font-size: 11px; margin-top:4px; color:var(--text-on-dark-muted)">As fotos não farão upload para nuvem. Ficam retidas localmente.</p>
+                <p style="font-size: 11px; margin-top:4px; color:var(--text-on-dark-muted)">As fotos nÃ£o farÃ£o upload para nuvem. Ficam retidas localmente.</p>
               </div>
               <div class="form-group" style="display:flex; align-items:flex-start; gap:8px;">
                 <input type="checkbox" id="p-aviso" required>
-                <label for="p-aviso" style="line-height:1.2; margin:0">O cliente foi devidamente avisado que as fotos serão apagadas após a entrega.</label>
+                <label for="p-aviso" style="line-height:1.2; margin:0">O cliente foi devidamente avisado que as fotos serÃ£o apagadas apÃ³s a entrega.</label>
               </div>
               <button type="submit" class="btn-admin" id="btn-submit-pedido" style="margin-top: 10px;">Adicionar Pedido</button>
             </form>
@@ -112,7 +112,7 @@
                     <th>Cliente</th>
                     <th>Pacote</th>
                     <th>Status</th>
-                    <th>Ações</th>
+                    <th>AÃ§Ãµes</th>
                   </tr>
                 </thead>
                 <tbody id="pedidos-body"></tbody>
@@ -127,15 +127,15 @@
   <!-- MODAL NANO BANANA -->
   <div class="modal" id="modal-banana">
     <div class="modal-content">
-      <button class="modal-close" onclick="closeModal()">×</button>
-      <h3 style="margin-bottom: 8px;">Área de Prompt (Nano Banana)</h3>
+      <button class="modal-close" onclick="closeModal()">Ã—</button>
+      <h3 style="margin-bottom: 8px;">Ãrea de Prompt (Nano Banana)</h3>
       <p style="font-size: 13px; color:var(--text-on-dark-muted); margin-bottom: 24px;">Abra o Nano Banana, cole este prompt na primeira aba e anexe as miniaturas mostradas abaixo.</p>
       
       <textarea id="prompt-displayer" class="form-control" readonly style="height: 140px; margin-bottom: 16px; background: rgba(0,0,0,0.5);"></textarea>
       
       <button class="btn-admin" id="btn-copy-prompt" style="background: var(--teal-blue); margin-bottom: 24px;">Copiar Prompt Completo</button>
 
-      <h4 style="font-size: 14px; margin-bottom: 8px;">Mídia do Cliente para Anexo:</h4>
+      <h4 style="font-size: 14px; margin-bottom: 8px;">MÃ­dia do Cliente para Anexo:</h4>
       <div class="thumb-grid" id="modal-thumbs"></div>
       
       <div style="margin-top: 32px; padding-top: 16px; border-top: 1px dashed rgba(255,255,255,0.2); text-align: right;">
@@ -144,7 +144,7 @@
     </div>
   </div>
 
-  <script src="js/data.js"></script>
+  <script src="js/data.js?v=1776527311,44916"></script>
   <script>
     const passCorrect = "memoria4k2026";
     let db;
@@ -202,7 +202,7 @@
         }
 
         pedidos.forEach(p => {
-          const statusClass = p.status === 'Concluído' ? 'status-concluido' : 'status-pendente';
+          const statusClass = p.status === 'ConcluÃ­do' ? 'status-concluido' : 'status-pendente';
           const tr = document.createElement('tr');
           tr.innerHTML = `
             <td>#${p.id}</td>
@@ -211,7 +211,7 @@
             <td><span class="status-badge ${statusClass}">${p.status}</span></td>
             <td>
               ${p.status === 'Pendente' 
-                ? `<button class="action-btn" onclick="openModal(${p.id})">Gerar Prompt / Mídia</button>`
+                ? `<button class="action-btn" onclick="openModal(${p.id})">Gerar Prompt / MÃ­dia</button>`
                 : `<span style="font-size:11px; opacity:0.5">- Expurgado -</span>`
               }
             </td>
@@ -221,12 +221,12 @@
       };
     }
 
-    // Formulário Novo Pedido
+    // FormulÃ¡rio Novo Pedido
     document.getElementById('form-novo-pedido').addEventListener('submit', async (e) => {
       e.preventDefault();
       const files = document.getElementById('p-fotos').files;
       if (files.length < 4) {
-        alert("O sistema necessita de no mínimo 4 fotos (ângulos) do cliente.");
+        alert("O sistema necessita de no mÃ­nimo 4 fotos (Ã¢ngulos) do cliente.");
         return;
       }
       const btn = document.getElementById('btn-submit-pedido');
@@ -267,7 +267,7 @@
       };
     });
 
-    // Lógica do Modal
+    // LÃ³gica do Modal
     function openModal(id) {
       selectedPedidoId = id;
       const tx = db.transaction('pedidos', 'readonly');
@@ -275,8 +275,8 @@
         const p = e.target.result;
         if(!p) return;
         
-        let promptText = p.aiPrompt || "Prompt não definido no data.js";
-        const instr = `--- PROMPT NANO BANANA ---\n\nTARGET PERSON: Cliente ${p.cliente}\n\n[PROMPT DE GERAÇÃO]:\n${promptText} [Utilize modelo de base fotorrealista]\n\n[INSTRUÇÃO DE LORA/FACE SWAP]:\nBaseado nas ${p.fotosBase64.length} imagens em anexo, transfira a identidade facial com 100% de semelhança orgânica.\n[QTD DE SAÍDAS ESTIPULADAS]: ${p.qtd}`;
+        let promptText = p.aiPrompt || "Prompt nÃ£o definido no data.js";
+        const instr = `--- PROMPT NANO BANANA ---\n\nTARGET PERSON: Cliente ${p.cliente}\n\n[PROMPT DE GERAÃ‡ÃƒO]:\n${promptText} [Utilize modelo de base fotorrealista]\n\n[INSTRUÃ‡ÃƒO DE LORA/FACE SWAP]:\nBaseado nas ${p.fotosBase64.length} imagens em anexo, transfira a identidade facial com 100% de semelhanÃ§a orgÃ¢nica.\n[QTD DE SAÃDAS ESTIPULADAS]: ${p.qtd}`;
         document.getElementById('prompt-displayer').value = instr;
 
         const grid = document.getElementById('modal-thumbs');
@@ -306,12 +306,12 @@
 
     document.getElementById('btn-concluir-pedido').addEventListener('click', () => {
       if(!selectedPedidoId) return;
-      if(confirm("Confirmar a conclusão do pedido fará a exclusão segura e IMBURKÁVEL de todas as imagens Base64 armazenadas no banco de memória IndexDB no cliente local. Prosseguir?")) {
+      if(confirm("Confirmar a conclusÃ£o do pedido farÃ¡ a exclusÃ£o segura e IMBURKÃVEL de todas as imagens Base64 armazenadas no banco de memÃ³ria IndexDB no cliente local. Prosseguir?")) {
         const tx = db.transaction('pedidos', 'readwrite');
         const store = tx.objectStore('pedidos');
         store.get(selectedPedidoId).onsuccess = (e) => {
           const p = e.target.result;
-          p.status = 'Concluído';
+          p.status = 'ConcluÃ­do';
           p.fotosBase64 = null; // expurga memoria
           store.put(p);
         };
@@ -324,3 +324,4 @@
   </script>
 </body>
 </html>
+
