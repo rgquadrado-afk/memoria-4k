@@ -81,12 +81,17 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById('detail-desc').textContent = item.fullDesc;
     
     // Gallery with real images
-    const mainImgWrap = document.getElementById('main-gallery-img').parentElement;
-    mainImgWrap.innerHTML = `
-      <!-- PROMPT_IMAGEM: ${item.galleryPrompts && item.galleryPrompts[0] ? item.galleryPrompts[0] : ''} -->
-      <img src="${item.gallery[0]}" alt="${item.title}" id="main-gallery-img" style="width:100%; height:100%; object-fit:cover; border-radius:12px;">
-    `;
     const mainImg = document.getElementById('main-gallery-img');
+    mainImg.src = item.gallery[0];
+    mainImg.alt = item.title;
+    mainImg.style.width = '100%';
+    mainImg.style.height = '100%';
+    mainImg.style.objectFit = 'cover';
+    mainImg.style.borderRadius = '12px';
+
+    // Insert comment before the image
+    const promptTextMain = item.galleryPrompts && item.galleryPrompts[0] ? item.galleryPrompts[0] : '';
+    mainImg.insertAdjacentHTML('beforebegin', `<!-- PROMPT_IMAGEM: ${promptTextMain} -->\n`);
 
     const thumbContainer = document.getElementById('thumb-container');
     thumbContainer.innerHTML = '';
