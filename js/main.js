@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
         observer.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.1 });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
   textElements.forEach(el => observer.observe(el));
 
@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // HIDDEN ADMIN ACCESS EGG
   let secretClicks = 0;
-  const logoSecret = document.querySelector('.navbar__logo-icon');
+  const logoSecret = document.querySelector('.navbar__logo-icon, .footer__logo-icon'); // Try header or footer icon
   if (logoSecret) {
     logoSecret.addEventListener('click', () => {
       secretClicks++;
@@ -80,23 +80,43 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     document.getElementById('detail-desc').textContent = item.fullDesc;
     
-    // Gallery
+    // Gallery with real images
+    const mainImgWrap = document.getElementById('main-gallery-img').parentElement;
+    mainImgWrap.innerHTML = `
+      <!-- PROMPT_IMAGEM: ${item.galleryPrompts && item.galleryPrompts[0] ? item.galleryPrompts[0] : ''} -->
+      <img src="${item.gallery[0]}" alt="${item.title}" id="main-gallery-img" style="width:100%; height:100%; object-fit:cover; border-radius:12px;">
+    `;
     const mainImg = document.getElementById('main-gallery-img');
+
     const thumbContainer = document.getElementById('thumb-container');
+    thumbContainer.innerHTML = '';
     
-    mainImg.src = item.gallery[0];
-    item.gallery.forEach((imgSrc, i) => {
-      const thumb = document.createElement('img');
-      thumb.src = imgSrc;
-      thumb.alt = `Thumbnail ${i+1}`;
-      if (i === 0) thumb.classList.add('active');
+    item.gallery.forEach((imgSrc, index) => {
+      const promptText = item.galleryPrompts && item.galleryPrompts[index] ? item.galleryPrompts[index] : '';
+      const thumbWrap = document.createElement('div');
+      thumbWrap.style.position = 'relative';
+      thumbWrap.style.width = '100px';
+      thumbWrap.style.height = '100px';
+      thumbWrap.style.flexShrink = '0';
+      thumbWrap.style.borderRadius = '8px';
+      thumbWrap.style.overflow = 'hidden';
+      thumbWrap.style.cursor = 'pointer';
       
-      thumb.addEventListener('click', () => {
+      const thumbId = 'thumb-' + index;
+      
+      thumbWrap.innerHTML = `
+        <!-- PROMPT_IMAGEM: ${promptText} -->
+        <img id="${thumbId}" src="${imgSrc}" alt="Thumbnail ${index+1}" style="width:100%; height:100%; object-fit:cover; transition: opacity 0.2s ease; opacity:${index === 0 ? '1' : '0.6'};">
+      `;
+      thumbContainer.appendChild(thumbWrap);
+
+      // Add click event listener to change main image
+      document.getElementById(thumbId).addEventListener('click', () => {
         mainImg.src = imgSrc;
-        document.querySelectorAll('.detail-thumbs img').forEach(t => t.classList.remove('active'));
-        thumb.classList.add('active');
+        // Update opacity for thumbnails
+        thumbContainer.querySelectorAll('img').forEach(t => t.style.opacity = '0.6');
+        document.getElementById(thumbId).style.opacity = '1';
       });
-      thumbContainer.appendChild(thumb);
     });
 
     // Pricing Logic dynamically populated
@@ -104,7 +124,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const prices = packagePricing[type];
     
     const qtyContainer = document.getElementById('qty-container');
-    const qtys = Object.keys(prices); // ["3", "5", "10"] etc.
+    const qtys = Object.keys(prices); // ["7", "12", "25"]
     
     let qtyHtml = '';
     qtys.forEach((q, index) => {
@@ -114,7 +134,7 @@ document.addEventListener("DOMContentLoaded", () => {
           <input type="radio" name="qty" value="${q}" ${isChecked}>
           <div class="qty-label">
             <div class="qty-number">${q}</div>
-            <div class="qty-text">${q == 1 ? 'Foto' : 'Fotos'}</div>
+            <div class="qty-text">Fotos</div>
           </div>
         </label>
       `;
@@ -124,17 +144,19 @@ document.addEventListener("DOMContentLoaded", () => {
     const qtyInputs = document.querySelectorAll('input[name="qty"]');
     const priceDisplay = document.getElementById('total-price');
     const btnWpp = document.getElementById('btn-wpp-checkout');
-    const phone = "5511915101982"; // O número definido
+    const phone = "5511915101982"; 
 
     function updateCheckout() {
-      const selectedQty = document.querySelector('input[name="qty"]:checked').value;
+      const selectedQtyElement = document.querySelector('input[name="qty"]:checked');
+      if(!selectedQtyElement) return;
+      const selectedQty = selectedQtyElement.value;
       const total = prices[selectedQty];
       
       // Formata moeda (R$ 00,00)
       const formattedTotal = total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
       priceDisplay.textContent = formattedTotal;
 
-      // Monta Link WhatsApp - FASE 3 FORMATO EXATO
+      // Monta Link WhatsApp - FASE FINAL FORMATO EXATO
       const text = `Olá! Gostaria do pacote *${item.title}* com *${selectedQty}* fotos. Valor: ${formattedTotal}. Aguardo instruções.`;
       btnWpp.href = `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
     }
@@ -146,21 +168,15 @@ document.addEventListener("DOMContentLoaded", () => {
     // Initialize initial values
     updateCheckout();
   }
-
 });
 
 // Helper Function: Generates HTML string for a catalog card
 function createCardHTML(item, delay) {
-  const isExternalImg = item.placeholderImg.startsWith('http');
-  const imgContent = isExternalImg 
-    ? `<div class="catalog-card__placeholder" style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:linear-gradient(135deg, var(--forest-deep), var(--teal-blue)); color:#FFF; font-family:var(--font-display); font-style:italic; font-size:20px; text-shadow:0 2px 12px rgba(0,0,0,0.3);"><span>✦ ${item.title}</span></div>`
-    : `<img src="${item.placeholderImg}" alt="${item.title}" loading="lazy">`;
-
   return `
-    <!-- PROMPT_IMAGEM: ${item.aiPrompt} -->
+    <!-- PROMPT_IMAGEM: ${item.aiPrompt || ''} -->
     <div class="catalog-card reveal" style="transition-delay: ${delay}s;">
       <div class="catalog-card__img-wrap">
-        ${imgContent}
+        <img src="${item.placeholderImg}" alt="${item.title}" loading="lazy">
       </div>
       <div class="catalog-card__body">
         <h3 class="catalog-card__title">${item.title}</h3>

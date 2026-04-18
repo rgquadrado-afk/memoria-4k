@@ -9,9 +9,14 @@ const catalogData = {
       type: "ensaio",
       desc: "Você no castelo da Cinderela, sob luz dourada de fim de tarde. Magia e encanto em 4K.",
       fullDesc: "Realize o sonho de ser o protagonista do seu próprio conto de fadas. Este ensaio utiliza inteligência artificial avançada para criar retratos hiper-realistas seus (ou de seus filhos) diante do icônico castelo da Disney. A iluminação é ajustada para a 'golden hour', garantindo pele perfeita e uma atmosfera cinematográfica repleta de magia e poeira estelar.",
-      placeholderImg: "card-disney.png",
-      gallery: ["card-disney.png", "card-disney.png", "card-disney.png"],
-      aiPrompt: "Retrato hiper-realista formato 4:3 de modelo sorrindo na frente de um icônico castelo da Disney ao entardecer (golden hour), luz dourada suave, poeira mágica brilhante no ar, qualidade de cinema, textura rica, ultra detalhado 8k."
+      placeholderImg: "disney_magica_1.png",
+      aiPrompt: "A breathtaking 8k photograph of a happy family laughing in front of the Magic Kingdom castle at sunset, golden hour lighting, magic sparkles, Disney style magic dust, cinematic composition, shot on ARRI Alexa, ultra realistic, editorial style, --ar 1:1 --stylize 250",
+      galleryPrompts: [
+        "A breathtaking 8k medium close up photograph of a woman smiling in front of the Cinderella castle at sunset, magical glowing particles in the air, cinematic composition, ultra realistic, editorial style, --ar 1:1",
+        "A breathtaking 8k full body photograph of a couple holding hands in front of the Magic Kingdom castle, golden hour lighting, cinematic composition, ultra realistic, editorial style, --ar 1:1",
+        "A breathtaking 8k portrait of a child wearing a princess dress near a glowing castle gate, beautiful magical lighting, sparkles, ultra realistic, editorial style, --ar 1:1"
+      ],
+      gallery: ["disney_magica_1.png", "disney_magica_2.png", "disney_magica_3.png"]
     },
     {
       id: "tapete_vermelho",
@@ -20,9 +25,14 @@ const catalogData = {
       type: "ensaio",
       desc: "Ensaio editorial nível Oscar. Glamour, flashes e elegância em altíssima resolução.",
       fullDesc: "Sinta a experiência de uma estrela de cinema. Você será retratado caminhando por um tapete vermelho luxuoso, vestindo alta costura (adaptada ao seu estilo), cercado pelo brilho dos flashes dos paparazzi. O resultado é um ensaio fashion editorial com contraste profundo e cores ricas.",
-      placeholderImg: "card-tapete.png",
-      gallery: ["card-tapete.png", "card-tapete.png", "card-tapete.png"],
-      aiPrompt: "Retrato fashion editorial 4:3 de modelo no tapete vermelho, usando traje de gala alta costura, cercado por flashes de fotógrafos desfocados ao fundo, iluminação dramática, alta resolução, estética revista Vogue."
+      placeholderImg: "tapete_vermelho_1.png",
+      aiPrompt: "A breathtaking 8k photograph of a celebrity walking the red carpet at an awards show, wearing high fashion haute couture, surrounded by paparazzi camera flashes blurring in the background, dramatic lighting, Vogue editorial style, ultra realistic, --ar 1:1 --stylize 250",
+      galleryPrompts: [
+        "A breathtaking 8k photograph of a celebrity posing confidently on the red carpet, high fashion dress, camera flashes background, Vogue editorial style, ultra realistic, --ar 1:1",
+        "A breathtaking 8k photograph of a man in a bespoke tuxedo walking the red carpet, paparazzi flashes, cinematic lighting, editorial style, --ar 1:1",
+        "A breathtaking 8k close up portrait of a star on the red carpet, elegant makeup, sparkling jewelry, dramatic paparazzi flashes background, ultra realistic, --ar 1:1"
+      ],
+      gallery: ["tapete_vermelho_1.png", "tapete_vermelho_2.png", "tapete_vermelho_3.png"]
     },
     {
       id: "paris_romance",
@@ -31,9 +41,14 @@ const catalogData = {
       type: "ensaio",
       desc: "A Torre Eiffel ao fundo, clima romântico e iluminação de cinema francês.",
       fullDesc: "O clássico ensaio parisiense sem precisar sair de casa. Ideal para casais ou retratos individuais sofisticados. A IA compõe a cena com a Torre Eiffel ao por do sol, textura suave de filme analógico e uma paleta de cores acolhedora, típica do cinema europeu moderno.",
-      placeholderImg: "https://via.placeholder.com/800x600/1C3F3A/FFFFFF?text=%E2%9C%A6+Paris+4K+Preview",
-      gallery: ["https://via.placeholder.com/800x600/1C3F3A/FFFFFF?text=%E2%9C%A6+Paris+4K+Preview"],
-      aiPrompt: "Retrato romântico 4:3 em Paris, Torre Eiffel ao fundo suavemente desfocada, por-do-sol de outono, tons quentes e nostálgicos, luz natural suave, estética de filme cinematográfico europeu."
+      placeholderImg: "paris_romance_1.png",
+      aiPrompt: "A breathtaking 8k romantic photograph of a couple embracing in Paris with the Eiffel Tower softly blurred in the background, autumn sunset, warm nostalgic tones, French cinema aesthetic, 35mm film texture, --ar 1:1 --stylize 250",
+      galleryPrompts: [
+        "A breathtaking 8k portrait of a woman in a trench coat standing near the Seine river, Eiffel Tower background, autumn sunset, French cinema aesthetic, --ar 1:1",
+        "A breathtaking 8k candid photograph of a couple having coffee at a romantic Parisian cafe, Eiffel Tower in the distance, warm tones, editorial style, --ar 1:1",
+        "A breathtaking 8k portrait of a man looking sharply towards the camera with Paris architecture and sunset in the background, 35mm film texture, --ar 1:1"
+      ],
+      gallery: ["paris_romance_1.png", "paris_romance_2.png", "paris_romance_3.png"]
     },
     {
       id: "safari_aventura",
@@ -42,9 +57,14 @@ const catalogData = {
       type: "ensaio",
       desc: "Na savana africana, com vida selvagem e cores quentes do amanhecer.",
       fullDesc: "Um ensaio selvagem e exclusivo. Colocamos você em um cenário de savana na África, rodeado por uma luz quente do amanhecer. Você usará trajes de expedição de luxo, com animais majestosos (como leões calmos ou girafas) suavemente desfocados ao fundo.",
-      placeholderImg: "https://via.placeholder.com/800x600/C26A40/FFFFFF?text=%E2%9C%A6+Safari+4K+Preview",
-      gallery: ["https://via.placeholder.com/800x600/C26A40/FFFFFF?text=%E2%9C%A6+Safari+4K+Preview"],
-      aiPrompt: "Retrato aventureiro 4:3 na savana africana ao amanhecer, usando traje de safári de linho, luz laranja quente, vida selvagem majestosa ao fundo (desfoque cinemático), ultra realismo."
+      placeholderImg: "safari_aventura_1.png",
+      aiPrompt: "A breathtaking 8k photograph of an adventurer in luxury linen safari clothing in the African savanna at sunrise, majestic giraffes softly blurred in the background, golden hour, National Geographic editorial style, --ar 1:1 --stylize 250",
+      galleryPrompts: [
+        "A breathtaking 8k portrait of a woman in luxury safari clothing standing in the tall grass of the African savanna at sunrise, cinematic lighting, --ar 1:1",
+        "A breathtaking 8k photograph of a man looking through binoculars in the African savanna, elephants out of focus in the distance, golden hour, --ar 1:1",
+        "A breathtaking 8k close up portrait of an adventurer smiling in an open safari jeep, vast savanna background, sunrise lighting, --ar 1:1"
+      ],
+      gallery: ["safari_aventura_1.png", "safari_aventura_2.png", "safari_aventura_3.png"]
     },
     {
       id: "estudio_vintage",
@@ -53,9 +73,14 @@ const catalogData = {
       type: "ensaio",
       desc: "Estética anos 50, pose clássica e texturas em preto e branco glorioso.",
       fullDesc: "Eternize-se como uma lenda de Hollywood dos anos 1950. Este pacote foca em retrato de estúdio com iluminação dramática (chiaroscuro), roupas da época e granulação de filme 35mm autêntico. Perfeito para quem busca sofisticação atemporal.",
-      placeholderImg: "https://via.placeholder.com/800x600/2A4A5A/FFFFFF?text=%E2%9C%A6+Vintage+4K+Preview",
-      gallery: ["https://via.placeholder.com/800x600/2A4A5A/FFFFFF?text=%E2%9C%A6+Vintage+4K+Preview"],
-      aiPrompt: "Retrato de estúdio vintage formato 4:3, estética anos 50 de Hollywood, preto e branco, iluminação chiaroscuro dramática, textura de filme 35mm, visual limpo e elegante."
+      placeholderImg: "estudio_vintage_1.png",
+      aiPrompt: "A breathtaking 8k vintage studio portrait photograph, 1950s Old Hollywood aesthetic, black and white, dramatic chiaroscuro lighting, authentic 35mm film grain, elegant style, ultra realistic, --ar 1:1 --stylize 250",
+      galleryPrompts: [
+        "A breathtaking 8k vintage studio portrait of a woman in a 1950s elegant dress, black and white, dramatic chiaroscuro lighting, 35mm film grain, --ar 1:1",
+        "A breathtaking 8k vintage studio portrait of a man in a classic 1950s suit, Old Hollywood aesthetic, high contrast black and white lighting, --ar 1:1",
+        "A breathtaking 8k close up portrait of a classic Hollywood starlet, delicate lighting, black and white, film grain, elegant styling, --ar 1:1"
+      ],
+      gallery: ["estudio_vintage_1.png", "estudio_vintage_2.png", "estudio_vintage_3.png"]
     },
     {
       id: "cyberpunk_neon",
@@ -64,9 +89,14 @@ const catalogData = {
       type: "ensaio",
       desc: "Luzes de neon, cidade futurista hiper-tecnológica e clima cyberpunk.",
       fullDesc: "Mergulhe no futuro. Seu rosto será perfeitamente integrado a um corpo com roupas tecnológicas, em uma cidade chuvosa e dominada pelo brilho dos letreiros neon em roxo e azul ciano. Nível de detalhes absurdo em jaquetas de couro sintético e reflexos de água.",
-      placeholderImg: "https://via.placeholder.com/800x600/100/FFF?text=%E2%9C%A6+Cyberpunk+4K+Preview",
-      gallery: ["https://via.placeholder.com/800x600/100/FFF?text=%E2%9C%A6+Cyberpunk+4K+Preview"],
-      aiPrompt: "Retrato formato 4:3 de um personagem em cidade cyberpunk, luz neon vibrante rosa e azul ciano refletindo em poças d'água no chão, jaqueta de couro tecnológica chuvosa, Unreal Engine 5 render, ultra 4K."
+      placeholderImg: "cyberpunk_neon_1.png",
+      aiPrompt: "A breathtaking 8k photograph of a sci-fi character in a rainy cyberpunk city, vibrant magenta and cyan neon lights reflecting on wet streets, high-tech leather jacket, Unreal Engine 5 aesthetic, ultra realistic, --ar 1:1 --stylize 250",
+      galleryPrompts: [
+        "A breathtaking 8k portrait of a cybernetic augmented woman in a rainy neon city, magenta and blue lights reflecting on her face, ultra realistic, --ar 1:1",
+        "A breathtaking 8k photograph of a man wearing a high-tech glowing jacket in a cyberpunk alleyway, wet streets, neon reflections, cinematic lighting, --ar 1:1",
+        "A breathtaking 8k close up portrait of a sci-fi character looking at glowing neon holographic signs, dramatic lighting, cyberpunk aesthetic, --ar 1:1"
+      ],
+      gallery: ["cyberpunk_neon_1.png", "cyberpunk_neon_2.png", "cyberpunk_neon_3.png"]
     },
     {
       id: "praia_paradisio",
@@ -75,9 +105,14 @@ const catalogData = {
       type: "ensaio",
       desc: "O mar turquesa das Maldivas e a areia branca perfeitos só para você.",
       fullDesc: "Um ensaio com a vibração de férias de luxo. A IA recria as Maldivas ou o Tahiti: águas cristalinas, luz do sol intensa (porém lisonjeira ao rosto) e estética de verão editorial de revista de turismo.",
-      placeholderImg: "https://via.placeholder.com/800x600/A8D8C8/1C3F3A?text=%E2%9C%A6+Praia+4K+Preview",
-      gallery: ["https://via.placeholder.com/800x600/A8D8C8/1C3F3A?text=%E2%9C%A6+Praia+4K+Preview"],
-      aiPrompt: "Retrato ensolarado 4:3 de férias em praia paradisíaca do Tahiti, areia super branca, mar azul turquesa vibrante cristalino, cores saturadas e alegres, iluminação de verão de alto padrão."
+      placeholderImg: "praia_paradisio_1.png",
+      aiPrompt: "A breathtaking 8k sunny photograph of a person relaxing on a paradise beach in the Maldives, white sand, vibrant turquoise crystal clear water, luxury travel editorial style, vivid summer colors, ultra realistic, --ar 1:1 --stylize 250",
+      galleryPrompts: [
+        "A breathtaking 8k portrait of a woman in a stylish summer dress standing on a pristine white sand beach, turquoise water background, luxury resort style, --ar 1:1",
+        "A breathtaking 8k photograph of a man walking on a tropical beach in the Maldives, bright sunshine, crystal clear ocean, high end lifestyle aesthetic, --ar 1:1",
+        "A breathtaking 8k candid shot of someone enjoying a luxury beach vacation, turquoise sea, bright vibrant sunlight, travel magazine editorial style, --ar 1:1"
+      ],
+      gallery: ["praia_paradisio_1.png", "praia_paradisio_2.png", "praia_paradisio_3.png"]
     },
     {
       id: "noite_gala",
@@ -86,9 +121,14 @@ const catalogData = {
       type: "ensaio",
       desc: "Mansão imperial, vestidos esplêndidos ou smokings impecáveis.",
       fullDesc: "Sinta-se na realeza. Estaremos em uma mansão luxuosa ou em um salão de baile. Mulheres com vestidos fluidos espetaculares, homens com smokings sob medida. A iluminação é focada em lustres de cristal e ambiente aquecido.",
-      placeholderImg: "https://via.placeholder.com/800x600/D4B896/0F1A15?text=%E2%9C%A6+Gala+4K+Preview",
-      gallery: ["https://via.placeholder.com/800x600/D4B896/0F1A15?text=%E2%9C%A6+Gala+4K+Preview"],
-      aiPrompt: "Retrato 4:3 de luxo em um salão de gala imponente, trajes finos, iluminação aconchegante vinda de lustres de cristal, reflexos em mármore, clima de realeza contemporânea 8K."
+      placeholderImg: "noite_gala_1.png",
+      aiPrompt: "A breathtaking 8k editorial photograph of high society people in a luxury gala ballroom, elegant gowns and bespoke tuxedos, warm lighting from crystal chandeliers, royal contemporary aesthetic, ultra realistic, --ar 1:1 --stylize 250",
+      galleryPrompts: [
+        "A breathtaking 8k portrait of a woman in an exquisite gala gown walking down a marble staircase in a luxury mansion, crystal chandelier lighting, royal aesthetic, --ar 1:1",
+        "A breathtaking 8k candid photograph of a man in a bespoke tuxedo holding a glass of champagne at a luxury gala, warm ambient lighting, highly detailed, --ar 1:1",
+        "A breathtaking 8k close up portrait of elegant high society figures talking at a luxury ballroom, soft glowing chandelier light, extreme luxury aesthetic, --ar 1:1"
+      ],
+      gallery: ["noite_gala_1.png", "noite_gala_2.png", "noite_gala_3.png"]
     },
     {
       id: "super_heroi",
@@ -97,9 +137,14 @@ const catalogData = {
       type: "ensaio",
       desc: "Traje épico, capa esvoaçante e um cenário urbano aguardando seu resgate.",
       fullDesc: "Para adultos e crianças que sonham grande. O pacote Super-herói cria um traje espetacular (nos tons de sua escolha), texturas estilo cinema da Marvel/DC, capa esvoaçante e um cenário épico – como o topo de um arranha-céu durante o crepúsculo.",
-      placeholderImg: "https://via.placeholder.com/800x600/b71c1c/FFF?text=%E2%9C%A6+Hero+4K+Preview",
-      gallery: ["https://via.placeholder.com/800x600/b71c1c/FFF?text=%E2%9C%A6+Hero+4K+Preview"],
-      aiPrompt: "Retrato 4:3 estilo poster de cinema, vestindo traje blindado de super-herói customizado texturizado, capa épica sentindo o vento, telhado de arranha-céu Gotham style de fundo, céu crepúsculo épico."
+      placeholderImg: "super_heroi_1.png",
+      aiPrompt: "A breathtaking 8k cinematic poster photograph of a superhero wearing a textured armored suit and flowing cape standing on a skyscraper edge at twilight, epic urban cityscape background, Marvel movie aesthetic, intense dramatic lighting, --ar 1:1 --stylize 250",
+      galleryPrompts: [
+        "A breathtaking 8k portrait of a superhero striking an epic pose on top of a skyscraper, flowing cape, twilight cityscape background, cinematic lighting, --ar 1:1",
+        "A breathtaking 8k mid-action photograph of a superhero landing with glowing energy effects, textured tactical suit, epic cinematic movie aesthetic, --ar 1:1",
+        "A breathtaking 8k close up portrait of a heroic figure looking into the distance, twilight lighting, highly detailed superhero armor texture, dramatic mood, --ar 1:1"
+      ],
+      gallery: ["super_heroi_1.png", "super_heroi_2.png", "super_heroi_3.png"]
     },
     {
       id: "conto_fadas",
@@ -108,9 +153,14 @@ const catalogData = {
       type: "ensaio",
       desc: "Uma floresta encantada, iluminação feérica e criaturas sutis.",
       fullDesc: "Mergulhe em um livro de história. Com estética de alta fantasia, o ensaio acontece numa floresta densa e mística, iluminada por fadas ou pirilampos brilhantes. Tonalidades de verde esmeralda e magia palpável na imagem.",
-      placeholderImg: "https://via.placeholder.com/800x600/1C3F3A/D4B896?text=%E2%9C%A6+Fadas+4K+Preview",
-      gallery: ["https://via.placeholder.com/800x600/1C3F3A/D4B896?text=%E2%9C%A6+Fadas+4K+Preview"],
-      aiPrompt: "Retrato hiper fotorrealista 4:3 em meio a uma floresta mágica feérica, tons ricos de musgo fresco, focos de luz verde e dourada flutuantes (fadas/pirilampos), clima místico do Senhor dos Anéis."
+      placeholderImg: "conto_fadas_1.png",
+      aiPrompt: "A breathtaking 8k hyper-realistic photograph of a person in an enchanted mystical forest, rich moss green tones, glowing floating fairy lights, magical Lord of the Rings aesthetic, ethereal lighting, --ar 1:1 --stylize 250",
+      galleryPrompts: [
+        "A breathtaking 8k portrait of an ethereal beauty standing in an enchanted forest, glowing moss, magical fairy lights, fantasy movie aesthetic, --ar 1:1",
+        "A breathtaking 8k photograph of a fantasy character exploring a deep mystical forest illuminated by magical bioluminescent glowing spores, ultra realistic, --ar 1:1",
+        "A breathtaking 8k close up portrait of a beautiful person softly illuminated by glowing fireflies in an enchanted forest, mysterious fantasy mood, --ar 1:1"
+      ],
+      gallery: ["conto_fadas_1.png", "conto_fadas_2.png", "conto_fadas_3.png"]
     },
     {
       id: "astro_cinema",
@@ -118,10 +168,15 @@ const catalogData = {
       tag: "Editorial",
       type: "ensaio",
       desc: "Retrato close-up ultra dramático, qualidade de pôster de blockbusters.",
-      fullDesc: "Focado inteiramente nas suas expressões. Um close-up dramático simulando a câmera RED ou ARRI Alexa de cinema. Iluminação Rembrandt marcante, cores dessaturadas (estilo thriller ou drama) e nitidez que revela cada textura da pele e dos olhos.",
-      placeholderImg: "https://via.placeholder.com/800x600/222/FFF?text=%E2%9C%A6+Astro+4K+Preview",
-      gallery: ["https://via.placeholder.com/800x600/222/FFF?text=%E2%9C%A6+Astro+4K+Preview"],
-      aiPrompt: "Close-up facial dramático 4:3, iluminação Rembrandt forte, sombreados intensos, grading de cores cinemático de blockbuster (Muted/Teal and Orange), textura de pele ultrarrealista filmada com lâmpadas ARRI."
+      fullDesc: "Focado inteiramente nas suas expressions. Um close-up dramático simulando a câmera RED ou ARRI Alexa de cinema. Iluminação Rembrandt marcante, cores dessaturadas (estilo thriller ou drama) e nitidez que revela cada textura da pele e dos olhos.",
+      placeholderImg: "astro_cinema_1.png",
+      aiPrompt: "A breathtaking 8k cinematic facial close-up photograph, intense Rembrandt lighting, heavy shadows, muted teal and orange Hollywood color grading, ultra-realistic skin texture, shot on ARRI Alexa 65mm, intense drama, --ar 1:1 --stylize 250",
+      galleryPrompts: [
+        "A breathtaking 8k dramatic close up portrait of a woman looking intensely at the camera, Rembrandt lighting, deep shadows, Hollywood thriller color grading, --ar 1:1",
+        "A breathtaking 8k cinematic portrait of a man, very dramatic lighting, high contrast, muted colors, shot on ARRI Alexa, extremely detailed facial texture, --ar 1:1",
+        "A breathtaking 8k close up of an actor's face in the shadows with bright eye reflections, intense cinematic drama, ultra high definition 8k, --ar 1:1"
+      ],
+      gallery: ["astro_cinema_1.png", "astro_cinema_2.png", "astro_cinema_3.png"]
     },
     {
       id: "esportista_radical",
@@ -130,9 +185,14 @@ const catalogData = {
       type: "ensaio",
       desc: "Montanhas nevadas ou surfe gigante com ação congelada em um milésimo de segundo.",
       fullDesc: "Mostre seu lado extremo, mesmo que fisicamente não chegue tão longe. Escolha o esporte (snowboard, surf, escalada sem corda), e a IA o transportará para a ação congelada no tempo perfeito, com partículas de água ou neve voando ao seu redor em 4K incrivelmente nítido.",
-      placeholderImg: "https://via.placeholder.com/800x600/D4885A/FFF?text=%E2%9C%A6+Radical+4K+Preview",
-      gallery: ["https://via.placeholder.com/800x600/D4885A/FFF?text=%E2%9C%A6+Radical+4K+Preview"],
-      aiPrompt: "Ação congelada em 4:3, esporte extremo num pico nevado snowboarder mid-air (ou surfista na crista de uma onda gigantesca), fotorealisticamente detalhada, gotículas congeladas no ar, alta adrenalina Red Bull aesthetic."
+      placeholderImg: "esportista_radical_1.png",
+      aiPrompt: "A breathtaking 8k high-speed extreme sports photograph, a snowboarder frozen mid-air above a snowy mountain peak, flying snow particles, hyper-realistic, high adrenaline Red Bull editorial style, crystal clear focus, --ar 1:1 --stylize 250",
+      galleryPrompts: [
+        "A breathtaking 8k photograph of an extreme snowboarder doing a high jump over a pristine snowy mountain, frozen snow particles in mid-air, high adrenaline editorial, --ar 1:1",
+        "A breathtaking 8k photograph of a surfer riding a massive giant wave, perfect action freeze-frame, water droplets splashing, ultra realistic, --ar 1:1",
+        "A breathtaking 8k portrait of an extreme mountain climber hanging from a high cliff edge, epic landscape background, ultra sharp focus, --ar 1:1"
+      ],
+      gallery: ["esportista_radical_1.png", "esportista_radical_2.png", "esportista_radical_3.png"]
     }
   ],
   
@@ -145,9 +205,14 @@ const catalogData = {
       type: "restauracao",
       desc: "Sua foto antiga ou danificada restaurada para um retrato nítido em 4K.",
       fullDesc: "Tiramos rasgos, arranhões, desfoque e danos causados pelo tempo. A tecnologia de Upscale reconstrói rostos que não podiam mais ser vistos, devolvendo a textura da pele e a nitidez sem parecer uma pintura plastificada. O máximo respeito à fisionomia original.",
-      placeholderImg: "card-restauracao.png",
-      gallery: ["card-restauracao.png", "card-restauracao.png", "card-restauracao.png"],
-      aiPrompt: "Split screen de imagem mostrando metade esquerda envelhecida, danificada e sépia sendo magicamente revelada como uma foto 4k mega-nítida ultra detalhada na direita."
+      placeholderImg: "restauracao_ultra_1.png",
+      aiPrompt: "A breathtaking 8k split screen image demonstrating photo restoration, the left half is an old damaged scratched sepia portrait, the right half is magically revealed as a flawless ultra-sharp highly detailed 4k photograph, editorial style, --ar 1:1 --stylize 250",
+      galleryPrompts: [
+        "A breathtaking 8k split screen image, left side old blurry damaged vintage photo, right side ultra sharp crystal clear modern restoration, --ar 1:1",
+        "A breathtaking 8k composite showing photo restoration process of a vintage portrait, restoring lost details, highly detailed, --ar 1:1",
+        "A breathtaking 8k close up split screen of an eye from a photo, left side heavily damaged and dusty, right side flawlessly restored and bright, --ar 1:1"
+      ],
+      gallery: ["restauracao_ultra_1.png", "restauracao_ultra_2.png", "restauracao_ultra_3.png"]
     },
     {
       id: "colorizacao_cinema",
@@ -156,9 +221,14 @@ const catalogData = {
       type: "restauracao",
       desc: "Traga fotos em Preto e Branco de volta à vida com cores realistas.",
       fullDesc: "Não usamos filtros genéricos. A colorização é feita por IA que analisa contexto (uniformes militares da época, texturas de árvores, pele) e aplica cores historicamente factíveis com qualidade e iluminação ricas.",
-      placeholderImg: "https://via.placeholder.com/800x600/C26A40/FFF?text=%E2%9C%A6+Color+4K+Preview",
-      gallery: ["https://via.placeholder.com/800x600/C26A40/FFF?text=%E2%9C%A6+Color+4K+Preview"],
-      aiPrompt: "Imagem demonstrando colorização. Um retrato histórico que transiciona gradualmente de preto e branco para cores ricas, brilhantes e fotorrealistas modernas."
+      placeholderImg: "colorizacao_cinema_1.png",
+      aiPrompt: "A breathtaking 8k image demonstrating colorization, a historical black and white portrait smoothly transitioning into vibrant, rich, photorealistic modern colors, gorgeous lighting, ultra realistic, --ar 1:1 --stylize 250",
+      galleryPrompts: [
+        "A breathtaking 8k split image showing a vintage black and white photo of a family beautifully transitioning into rich vibrant cinematic colors, --ar 1:1",
+        "A breathtaking 8k vintage portrait vividly colorized with historically accurate tones, stunning skin texture, warm lighting, --ar 1:1",
+        "A breathtaking 8k historical scene smoothly fading from high contrast black and white to vibrant natural lifelike colors, editorial style, --ar 1:1"
+      ],
+      gallery: ["colorizacao_cinema_1.png", "colorizacao_cinema_2.png", "colorizacao_cinema_3.png"]
     },
     {
       id: "animacao_living",
@@ -167,24 +237,29 @@ const catalogData = {
       type: "restauracao",
       desc: "Sua foto ou retrato transformado em um vídeo sutil realista (piscar, respirar).",
       fullDesc: "Um toque de Harry Potter: pegamos seu retrato em 4K (antigo ou gerado) e aplicamos um modelo de movimento neural sutil. A pessoa pisca, respira e vira levemente o rosto com naturalidade assustadora. Ideal para homenagens ou quadros digitais.",
-      placeholderImg: "https://via.placeholder.com/800x600/2A4A5A/FFF?text=%E2%9C%A6+Living+4K+Preview",
-      gallery: ["https://via.placeholder.com/800x600/2A4A5A/FFF?text=%E2%9C%A6+Living+4K+Preview"],
-      aiPrompt: "Fotografia retrato de família que tem a borda imitando um quadro mágico (estilo living portrait), sutis rastros e poeira brilhante insinuando que a foto está literalmente viva e respirando."
+      placeholderImg: "animacao_living_1.png",
+      aiPrompt: "A breathtaking 8k family portrait photograph inside a magical moving picture frame moving softly, subtle glowing magical dust indicating the photo is literally alive and breathing, ultra realistic magic aesthetic, --ar 1:1 --stylize 250",
+      galleryPrompts: [
+        "A breathtaking 8k magical portrait frame where the subject appears slightly moving and blinking, subtle magical light trails, living photo illusion, --ar 1:1",
+        "A breathtaking 8k beautiful portrait of a person in a frame magically coming to life, soft glow, realistic, magical photography effect, --ar 1:1",
+        "A breathtaking 8k close up of a living portrait gently breathing and turning its head, magical glowing borders, highly detailed, --ar 1:1"
+      ],
+      gallery: ["animacao_living_1.png", "animacao_living_2.png", "animacao_living_3.png"]
     }
   ]
 };
 
-// Tabelas de preço da FASE 3
+// Tabelas de preço atualizadas (7, 12, 25 fotos)
 const packagePricing = {
   ensaio: {
-    3: 39.90,
-    5: 59.90,
-    10: 99.90
+    7: 29.90,
+    12: 44.90,
+    25: 69.90
   },
   restauracao: {
-    1: 14.90,
-    3: 34.90,
-    5: 49.90
+    7: 19.90,
+    12: 29.90,
+    25: 44.90
   }
 };
 
