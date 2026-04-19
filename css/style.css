@@ -263,6 +263,34 @@ img {
   color: var(--amber);
 }
 
+.footer {
+  background: var(--dark-bg);
+  padding: 60px 0;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  margin-top: 80px;
+}
+
+.footer__inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.footer__logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: white;
+  font-weight: 600;
+}
+
+.footer__copy {
+  color: rgba(255,255,255,0.4);
+  font-size: 14px;
+}
+
 /* ============================================
    CATALOG GRID (index.html)
    ============================================ */

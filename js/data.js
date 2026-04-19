@@ -224,7 +224,7 @@ const catalogData = {
       placeholderImg: "colorizacao_cinema_1.png",
       aiPrompt: "B&W portrait transitioning into modern colors.",
       galleryPrompts: ["Family colorization transition", "Vintage portrait colorized", "Historical scene colorization"],
-      gallery: ["color_cinema_1.png", "color_cinema_2.png", "color_cinema_3.png"]
+      gallery: ["colorizacao_cinema_1.png", "colorizacao_cinema_2.png", "colorizacao_cinema_3.png"]
     },
     {
       id: "animacao_living",

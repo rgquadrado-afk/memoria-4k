@@ -5,21 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Detalhes do Pacote — Memória 4K</title>
   <link rel="icon" type="image/png" href="favicon.png">
-  
-  <!-- Fontes -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-
-  <link rel="stylesheet" href="css/style.css?v=1.0.4">
+  <link rel="stylesheet" href="css/style.css?v=2026_audit_hardfix">
 </head>
 <body>
-
-  <!-- NAVBAR -->
   <nav class="navbar">
     <div class="navbar__logo">
       <div class="navbar__logo-icon">✦</div>
-      <a href="index.html">Memória 4K</a>
+      <a href="index.html" style="color:inherit; text-decoration:none;">Memória 4K</a>
     </div>
     <ul class="navbar__links" id="nav-links">
       <li><a href="index.html#inicio">Início</a></li>
@@ -27,58 +22,36 @@
       <li><a href="index.html#lifestyle">Elite & Sucesso</a></li>
       <li><a href="index.html#restauracao">Restauração</a></li>
     </ul>
-    <button class="navbar__hamburger" id="hamburger" aria-label="Menu">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
   </nav>
 
-  <!-- HEADER -->
   <header class="page-header">
     <div class="container">
       <h1 class="page-title" id="detail-title">Carregando...</h1>
-      <p class="page-subtitle">Personalize seu ensaio e receba em até 24 horas.</p>
+      <p class="page-subtitle">Sua imagem transformada em obra de arte 8K em até 24h.</p>
     </div>
   </header>
 
-  <!-- CONTEÚDO PRINCIPAL -->
   <main class="container">
-    <div class="detail-layout" id="detail-content">
+    <div class="detail-layout">
       <!-- Galeria -->
       <div class="detail-gallery reveal">
-        <div class="main-img-wrap" style="border-radius: 16px; overflow: hidden; background: #000; aspect-ratio: 4/3;">
-          <img id="main-gallery-img" src="" alt="" style="width:100%; height:100%; object-fit:cover;">
+        <div id="main-img-wrap" style="aspect-ratio:4/3; background:#000; border-radius:16px; overflow:hidden;">
+          <img id="main-gallery-img" src="" alt="Principal" style="width:100%; height:100%; object-fit:cover;">
         </div>
-        <div class="detail-thumbs" id="thumb-container">
-          <!-- Miniaturas JS -->
-        </div>
+        <div class="detail-thumbs" id="thumb-container" style="display:grid; grid-template-columns:repeat(3, 1fr); gap:12px; margin-top:12px;"></div>
       </div>
 
-      <!-- Informações e Checkout -->
-      <div class="detail-info reveal" style="transition-delay: 0.1s;">
-        <div class="detail-description" id="detail-desc">
-          <!-- Descrição JS -->
-        </div>
-
+      <!-- Info -->
+      <div class="detail-info reveal" style="transition-delay:0.1s;">
+        <p id="detail-desc" class="detail-description"></p>
         <div class="calculator-box">
           <p class="calc-title">Selecione a quantidade</p>
-          <div class="qty-selector" id="qty-container">
-            <!-- Opções JS -->
-          </div>
-
+          <div class="qty-selector" id="qty-container"></div>
           <div class="price-display">
-            <span class="label">Total do Investimento</span>
+            <span class="label">Total</span>
             <span class="value" id="total-price">R$ 0,00</span>
           </div>
-
-          <a id="btn-wpp-checkout" href="#" target="_blank" rel="noopener" class="btn-primary">
-            Confirmar e Pedir via WhatsApp
-          </a>
-
-          <p style="font-size: 11px; color: var(--text-on-light-muted); margin-top: 16px; text-align: center;">
-            Pagamento único via PIX ou Cartão após a validação das fotos.
-          </p>
+          <a id="btn-wpp-checkout" href="#" target="_blank" rel="noopener" class="btn-primary" style="display:block; text-align:center; text-decoration:none; background:#25D366; color:#fff; padding:18px; border-radius:10px; font-weight:600;">Pedir no WhatsApp</a>
         </div>
       </div>
     </div>
@@ -86,16 +59,12 @@
 
   <footer class="footer">
     <div class="footer__inner">
-      <div class="footer__logo">
-        <div class="footer__logo-icon">✦</div>
-        Memória 4K
-      </div>
-      <span class="footer__copy">© 2026 Memória 4K. Todos os direitos reservados.</span>
+      <div class="footer__logo">✦ Memória 4K</div>
+      <span class="footer__copy">© 2026 Memória 4K.</span>
     </div>
   </footer>
 
-  <!-- SCRIPTS -->
-  <script src="js/data.js?v=20260419_1"></script>
-  <script src="js/main.js?v=20260419_1"></script>
+  <script src="js/data.js?v=2026_audit_hardfix"></script>
+  <script src="js/main.js?v=2026_audit_hardfix"></script>
 </body>
 </html>
