@@ -32,45 +32,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // NAVBAR SCROLL EFFECT
   const navbar = document.querySelector('.navbar');
-  const backToTop = document.getElementById('back-to-top');
-
-  window.addEventListener('scroll', () => {
-    // Navbar effect
-    if (navbar) {
+  if (navbar) {
+    window.addEventListener('scroll', () => {
       if (window.scrollY > 50) {
         navbar.classList.add('scrolled');
       } else {
         navbar.classList.remove('scrolled');
       }
-    }
-
-    // Back to top visibility
-    if (backToTop) {
-      if (window.scrollY > 300) {
-        backToTop.classList.add('visible');
-      } else {
-        backToTop.classList.remove('visible');
-      }
-    }
-  });
-
-  if (backToTop) {
-    backToTop.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   }
 
-  // HIDDEN ADMIN ACCESS EGG (Refatorado para todos os logos)
+  // HIDDEN ADMIN ACCESS EGG
   let secretClicks = 0;
-  const logosSecret = document.querySelectorAll('.navbar__logo-icon, .footer__logo-icon');
-  logosSecret.forEach(logo => {
-    logo.addEventListener('click', () => {
+  const logoSecret = document.querySelector('.navbar__logo-icon, .footer__logo-icon'); // Try header or footer icon
+  if (logoSecret) {
+    logoSecret.addEventListener('click', () => {
       secretClicks++;
       if (secretClicks === 5) {
         window.location.href = 'admin.html';
       }
     });
-  });
+  }
 
   // 3. DETAILS PAGE RENDERING (If we are on detalhe.html)
   const detailContainer = document.getElementById('detail-content');

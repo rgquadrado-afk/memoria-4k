@@ -193,6 +193,70 @@ const catalogData = {
         "A breathtaking 8k portrait of an extreme mountain climber hanging from a high cliff edge, epic landscape background, ultra sharp focus, --ar 1:1"
       ],
       gallery: ["esportista_radical_1.png", "esportista_radical_2.png", "esportista_radical_3.png"]
+    },
+    {
+      id: "lider_corporativo",
+      title: "Líder Corporativo",
+      tag: "💼 Negócios",
+      type: "ensaio",
+      desc: "Retratos executivos em escritórios de luxo, estética Forbes e poder corporativo.",
+      fullDesc: "O ensaio definitivo para sua marca pessoal. Posicionamos você em ambientes de escritórios inteligentes, salas de reunião de alto padrão em arranha-céus, com iluminação editorial que transmite confiança, autoridade e sucesso. Roupas sociais impecáveis e profundidade de campo digna das maiores revistas de negócios do mundo.",
+      placeholderImg: "lider_corporativo_1.png",
+      aiPrompt: "A breathtaking 8k corporate portrait of a successful executive in a luxury glass office, cityscape background, soft morning light, professional editorial style, Arri Alexa, --ar 1:1",
+      galleryPrompts: [
+        "A breathtaking 8k portrait of an executive leader in a tailored suit standing in a modern office with panoramic city views, cinematic lighting, --ar 1:1",
+        "A breathtaking 8k close up portrait of a confident business woman in a board room, elegant professional style, soft lighting, sharp focus, --ar 1:1",
+        "A breathtaking 8k photograph of a professional in a luxury office environment, natural light, high-end business editorial aesthetic, --ar 1:1"
+      ],
+      gallery: ["lider_corporativo_1.png", "lider_corporativo_1.png", "lider_corporativo_1.png"]
+    },
+    {
+      id: "legado_luxo",
+      title: "Legado & Luxo",
+      tag: "💎 Bilionário",
+      type: "ensaio",
+      desc: "O estilo de vida dos super ricos: jatos, iates e o 'Quiet Luxury'.",
+      fullDesc: "Entre no mundo da ultra-exclusividade. Este ensaio captura a essência do luxo silencioso, posicionando você em cenários como o interior de jatos particulares, decks de iates luxuosos ou coberturas icônicas. Foco em elegância extrema, tecidos nobres e uma atmosfera de herança e sofisticação inalcançável.",
+      placeholderImg: "legado_luxo_1.png",
+      aiPrompt: "A breathtaking 8k luxury lifestyle photograph of a person in a private jet cabin, high-end fashion, quiet luxury aesthetic, soft natural lighting through windows, ultra realistic, --ar 1:1",
+      galleryPrompts: [
+        "A breathtaking 8k portrait of a man in luxury casual wear on a yacht deck, sunset lighting, ocean background, rich textures, --ar 1:1",
+        "A breathtaking 8k fashion portrait of a woman in a designer silk dress in a high-end penthouse, minimal luxury decor, cinematic lighting, --ar 1:1",
+        "A breathtaking 8k close up of someone in luxury attire, focusing on expensive details and elegant facial expression, soft window light, --ar 1:1"
+      ],
+      gallery: ["legado_luxo_1.png", "legado_luxo_1.png", "legado_luxo_1.png"]
+    },
+    {
+      id: "aniversario_premium",
+      title: "Celebration Royale",
+      tag: "🎂 Aniversário",
+      type: "ensaio",
+      desc: "Seu aniversário com o glamour e a perfeição de uma capa de revista de luxo.",
+      fullDesc: "Comemore seu novo ciclo com a sofisticação que ele merece. Cenários decorados com balões metalizados premium, bolos artísticos e uma atmosfera de festa de alta sociedade. A iluminação é festiva e elegante, capturando a alegria e o glamour de um momento único, transformando seu aniversário em uma obra de arte 4K.",
+      placeholderImg: "aniversario_premium_1.png",
+      aiPrompt: "A breathtaking 8k birthday celebration portrait of a person among premium gold and champagne balloons, luxury party setting, glamorous style, cinematic lighting, happy expression, --ar 1:1",
+      galleryPrompts: [
+        "A breathtaking 8k close up portrait of someone blowing out candles on a luxury designer cake, warm candlelight glow on face, happy atmosphere, --ar 1:1",
+        "A breathtaking 8k full body portrait of a woman in a celebration dress, luxury party background with metallic balloons, elegant posing, --ar 1:1",
+        "A breathtaking 8k photograph of a glamorous birthday celebration, champagne glasses, golden lighting, happy faces, editorial style, --ar 1:1"
+      ],
+      gallery: ["aniversario_premium_1.png", "aniversario_premium_1.png", "aniversario_premium_1.png"]
+    },
+    {
+      id: "influencer_pro",
+      title: "Influencer Pro",
+      tag: "📸 Digital",
+      type: "ensaio",
+      desc: "Personal branding premium para quem domina o mundo digital.",
+      fullDesc: "O ensaio indispensável para criadores de conteúdo e figuras públicas. Focamos em um estilo de vida dinâmico, moderno e esteticamente impecável. Cenários urbanos chic, estúdios minimalistas ou ambientes tecnologicamente integrados que elevam o nível do seu perfil para o patamar de autoridade global.",
+      placeholderImg: "influencer_pro_1.png",
+      aiPrompt: "A breathtaking 8k personal branding portrait for an influencer, modern minimal studio background, vibrant cinematic lighting, trendy fashion, sharp focus, --ar 1:1",
+      galleryPrompts: [
+        "A breathtaking 8k street style portrait of a content creator in an urban chic location, soft afternoon light, high fashion aesthetic, --ar 1:1",
+        "A breathtaking 8k portrait of an influencer in a high-tech studio setting, colorful rim lighting, professional photography style, --ar 1:1",
+        "A breathtaking 8k candid lifestyle portrait of a happy creator in a trendy location, vibrant colors, extremely detailed skin texture, --ar 1:1"
+      ],
+      gallery: ["influencer_pro_1.png", "influencer_pro_1.png", "influencer_pro_1.png"]
     }
   ],
   
