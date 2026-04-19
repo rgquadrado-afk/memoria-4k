@@ -1,17 +1,16 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MemÃ³ria 4K â€” RestauraÃ§Ã£o de Fotos Antigas e Ensaios ImpossÃ­veis em Ultra 4K</title>
-  <meta name="description" content="Transforme fotos antigas em retratos 4K ou crie ensaios fotogrÃ¡ficos impossÃ­veis. Qualidade cinematogrÃ¡fica. Sem mensalidade. Entrega em atÃ© 24h.">
+  <title>Memória 4K — Ensaios Fotográficos com IA de Alta Fidelidade</title>
+  <meta name="description" content="Transforme fotos antigas em retratos 4K ou crie ensaios fotográficos impossíveis. Qualidade cinematográfica. Sem mensalidade. Entrega em até 24h.">
 
   <!-- Open Graph / WhatsApp -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="MemÃ³ria 4K â€” Suas memÃ³rias, qualidade Ultra 4K">
-  <meta property="og:description" content="RestauraÃ§Ã£o de fotos antigas e ensaios fotogrÃ¡ficos impossÃ­veis com inteligÃªncia artificial. Qualidade cinematogrÃ¡fica.">
+  <meta property="og:title" content="Memória 4K — Suas memórias em 8K">
+  <meta property="og:description" content="Restauração de fotos antigas e ensaios fotográficos impossíveis com inteligência artificial.">
   <meta property="og:image" content="hero.png">
-  <meta property="og:url" content="">
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="favicon.png">
@@ -23,259 +22,168 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 
   <!-- Estilos Globais -->
-  <link rel="stylesheet" href="css/style.css?v=1776616846,32132">
+  <link rel="stylesheet" href="css/style.css?v=1.0.4">
   
   <style>
-    /* CSS Adicional resgatado da Landing Page do Pluma Design System */
-    .hero { position: relative; width: 100%; min-height: 100vh; display: flex; align-items: center; overflow: hidden; }
+    .hero { position: relative; width: 100%; min-height: 100vh; display: flex; align-items: center; overflow: hidden; background: var(--dark-bg); }
     .hero__bg { position: absolute; inset: 0; z-index: 0; }
     .hero__bg img { width: 100%; height: 100%; object-fit: cover; object-position: center right; }
-    .hero__bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to right, rgba(15, 26, 21, 0.88) 0%, rgba(15, 26, 21, 0.65) 30%, rgba(15, 26, 21, 0.2) 55%, rgba(15, 26, 21, 0.05) 75%, transparent 100%); }
+    .hero__bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to right, rgba(15, 26, 21, 0.9) 0%, rgba(15, 26, 21, 0.4) 50%, transparent 100%); }
     .hero__content { position: relative; z-index: 2; max-width: var(--container-max); margin: 0 auto; padding: 120px var(--section-px) 0; width: 100%; }
-    .hero__text { max-width: 540px; }
-    .hero__badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.1); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.15); border-radius: 100px; padding: 8px 18px; font-size: 13px; color: var(--text-on-dark-muted); margin-bottom: 28px; }
+    .hero__text { max-width: 600px; }
+    .hero__badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.1); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.15); border-radius: 100px; padding: 8px 18px; font-size: 13px; color: var(--white); margin-bottom: 28px; }
     .hero__badge-dot { width: 6px; height: 6px; background: var(--pale-teal); border-radius: 50%; animation: pulse-dot 2s infinite; }
     @keyframes pulse-dot { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
-    .hero h1 { font-family: var(--font-display); font-size: clamp(44px, 7vw, 88px); line-height: 1.05; letter-spacing: -0.02em; color: var(--white); margin-bottom: 24px; }
+    .hero h1 { font-family: var(--font-display); font-size: clamp(40px, 7vw, 80px); line-height: 1.05; letter-spacing: -0.02em; color: var(--white); margin-bottom: 24px; }
     .hero h1 em { font-style: italic; background: linear-gradient(135deg, var(--pale-teal), var(--warm-sand)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-    .hero__subtitle { color: rgba(255,255,255,0.82); font-size: 17px; max-width: 420px; margin-bottom: 36px; line-height: 1.6; }
-    .hero__cta { display: inline-flex; align-items: center; gap: 10px; background: var(--white); color: var(--text-dark); border-radius: 100px; padding: 16px 32px; font-weight: 500; font-size: 15px; transition: all 0.25s ease; border: none; cursor: pointer; }
-    .hero__cta:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,0,0,0.2); }
-    .hero__stats { position: absolute; right: var(--section-px); bottom: 15%; z-index: 2; display: flex; flex-direction: column; gap: 24px; }
-    .hero__stat { text-align: right; color: var(--white); }
-    .hero__stat-number { font-family: var(--font-display); font-style: italic; font-size: 42px; line-height: 1; letter-spacing: -0.02em; }
-    .hero__stat-label { font-size: 13px; color: rgba(255,255,255,0.7); margin-top: 4px; }
-    @media (max-width: 768px) { .hero__stats { display: none; } }
-
-    /* Como Funciona */
-    .how-it-works { background: var(--forest-deep); padding: var(--section-py) 0; color: var(--white); }
-    .section-eyebrow { font-size: 13px; font-weight: 500; color: var(--terracotta); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 16px; }
-    .how-it-works .section-eyebrow { color: var(--pale-teal); }
-    .section-title { font-family: var(--font-display); font-weight: 400; font-size: clamp(32px, 4vw, 52px); line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 56px; }
-    .how-it-works .section-title { color: var(--white); }
-    .how-it-works .section-title em { background: linear-gradient(135deg, var(--pale-teal), var(--warm-sand)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-    .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
-    .step { position: relative; padding: 32px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 20px; transition: all 0.25s ease; }
-    .step:hover { background: rgba(255,255,255,0.10); transform: translateY(-4px); border-color: rgba(255,255,255,0.22); }
-    .step__number { width: 44px; height: 44px; background: rgba(255,255,255,0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 18px; font-weight: 700; color: var(--pale-teal); margin-bottom: 20px; }
-    .step__title { font-family: var(--font-display); font-style: italic; font-size: 20px; margin-bottom: 10px; letter-spacing: -0.01em; }
-    .step__desc { font-size: 15px; color: var(--text-on-dark-muted); line-height: 1.6; }
-    .step:not(:last-child)::after { content: ''; position: absolute; right: -16px; top: 52px; width: 32px; height: 2px; background: linear-gradient(to right, rgba(255,255,255,0.2), transparent); }
-    @media (max-width: 900px) { .steps { grid-template-columns: 1fr; } .step:not(:last-child)::after { display: none; } }
-
-    /* Depoimentos */
-    .testimonials { background: var(--off-white); padding: var(--section-py) 0; position: relative; }
-    .testimonials::before { content: ''; position: absolute; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E"); background-repeat: repeat; background-size: 256px; pointer-events: none; }
-    .testimonials .section-title { color: var(--text-dark); }
-    .testimonials .section-title em { color: var(--forest-deep); font-style: italic; }
-    .testimonials__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; position: relative; }
-    .testimonial-card { background: rgba(255,255,255,0.70); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.80); border-radius: 16px; padding: 32px; transition: all 0.25s ease; }
-    .testimonial-card:hover { transform: translateY(-4px); box-shadow: 0 8px 32px rgba(0,0,0,0.06); }
-    .testimonial-card__quote { font-family: var(--font-display); font-style: italic; font-size: 18px; line-height: 1.5; color: var(--text-dark); margin-bottom: 20px; }
-    .testimonial-card__stars { color: var(--terracotta); font-size: 14px; letter-spacing: 2px; margin-bottom: 16px; }
-    .testimonial-card__author { display: flex; align-items: center; gap: 12px; }
-    .testimonial-card__avatar { width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, var(--forest-deep), var(--teal-blue)); display: flex; align-items: center; justify-content: center; color: var(--white); font-weight: 600; font-size: 14px; }
-    .testimonial-card__name { font-weight: 500; font-size: 15px; color: var(--text-dark); }
-    .testimonial-card__role { font-size: 13px; color: var(--text-on-light-muted); }
-    @media (max-width: 900px) { .testimonials__grid { grid-template-columns: 1fr; } }
-
-    /* CTA Final */
-    .cta-final { background: var(--forest-deep); padding: var(--section-py) 0; text-align: center; color: var(--white); position: relative; overflow: hidden; }
-    .cta-final::before { content: ''; position: absolute; top: -40%; left: 50%; transform: translateX(-50%); width: 800px; height: 800px; background: radial-gradient(circle, rgba(194,106,64,0.12) 0%, transparent 65%); pointer-events: none; }
-    .cta-final .section-title { color: var(--white); margin-bottom: 24px; max-width: 600px; margin-left: auto; margin-right: auto; }
-    .cta-final .section-title em { background: linear-gradient(135deg, var(--pale-teal), var(--warm-sand)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-style: italic;}
-    .cta-final__subtitle { font-size: 17px; color: var(--text-on-dark-muted); max-width: 460px; margin: 0 auto 40px; line-height: 1.6; }
-    .cta-final__benefits { display: flex; justify-content: center; gap: 32px; margin-bottom: 40px; flex-wrap: wrap; }
-    .cta-final__benefit { display: flex; align-items: center; gap: 8px; font-size: 15px; color: rgba(255,255,255,0.85); }
-    .cta-final__benefit-icon { width: 24px; height: 24px; background: rgba(168,216,200,0.15); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; color: var(--pale-teal); }
-    .cta-final__button { display: inline-flex; align-items: center; gap: 10px; background: var(--white); color: var(--forest-deep); border-radius: 100px; padding: 18px 40px; font-weight: 600; font-size: 16px; border: none; cursor: pointer; transition: all 0.25s ease; position: relative; z-index: 1; }
-    .cta-final__button:hover { background: rgba(255,255,255,0.90); transform: translateY(-2px); box-shadow: 0 12px 40px rgba(0,0,0,0.2); }
-    
-    /* Footer & General */
-    .footer { background: var(--dark-bg); border-top: 1px solid rgba(255,255,255,0.08); padding: 48px var(--section-px); color: var(--white); }
-    .footer__inner { max-width: var(--container-max); margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 24px; }
-    .footer__logo { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 16px; }
-    .footer__logo-icon { width: 28px; height: 28px; background: linear-gradient(135deg, var(--terracotta), var(--amber)); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14px; }
-    .footer__links { display: flex; gap: 24px; list-style: none; }
-    .footer__links a { color: rgba(255,255,255,0.55); font-size: 14px; transition: color 0.2s ease; }
-    .footer__links a:hover { color: var(--white); }
-    .footer__copy { font-size: 13px; color: rgba(255,255,255,0.4); }
-    @media (max-width: 768px) { .footer__inner { flex-direction: column; text-align: center; } }
+    .hero__subtitle { color: rgba(255,255,255,0.85); font-size: 18px; max-width: 480px; margin-bottom: 36px; line-height: 1.6; }
+    .hero__cta { display: inline-flex; align-items: center; gap: 10px; background: var(--white); color: var(--text-dark); border-radius: 100px; padding: 16px 32px; font-weight: 600; font-size: 15px; transition: all 0.25s ease; border: none; }
+    .hero__cta:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
   </style>
 </head>
-<body>
+<body id="inicio">
 
-  <!-- ============================================
-       NAVBAR
-       ============================================ -->
+  <!-- NAVBAR -->
   <nav class="navbar" id="navbar">
     <div class="navbar__logo">
-      <div class="navbar__logo-icon">âœ¦</div>
-      MemÃ³ria 4K
+      <div class="navbar__logo-icon">✦</div>
+      Memória 4K
     </div>
-    <ul class="navbar__links">
-      <li><a href="#catalogo">CatÃ¡logo</a></li>
-      <li><a href="#como-funciona">Como Funciona</a></li>
-      <li><a href="#depoimentos">Depoimentos</a></li>
+    <ul class="navbar__links" id="nav-links">
+      <li><a href="#inicio">Início</a></li>
+      <li><a href="#catalogo">Ensaios</a></li>
+      <li><a href="#lifestyle">Elite & Sucesso</a></li>
+      <li><a href="#restauracao">Restauração</a></li>
     </ul>
-    <a href="https://wa.me/5511915101982?text=OlÃ¡! Quero saber mais sobre o MemÃ³ria 4K." target="_blank" rel="noopener noreferrer" class="navbar__cta">
-      Falar no WhatsApp
-      <span style="display:inline-flex;align-items:center;justify-content:center;background:var(--text-dark);color:var(--white);width:22px;height:22px;border-radius:6px;font-size:12px;">â†—</span>
+    <button class="navbar__hamburger" id="hamburger" aria-label="Menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <a href="https://wa.me/5511915101982?text=Olá! Quero saber mais sobre o Memória 4K." target="_blank" rel="noopener noreferrer" class="navbar__cta">
+      WhatsApp ↗
     </a>
   </nav>
 
-  <!-- ============================================
-       HERO SECTION (CINEMATIC)
-       ============================================ -->
+  <!-- HERO -->
   <header class="hero">
-    <!-- PROMPT_IMAGEM: A breathtaking 8k cinematic portrait photograph, extreme wide shot of a beautiful editorial scene, warm glowing light, teal shadows, cinematic movie poster aesthetic, ultra realistic, --ar 16:9 --stylize 250 -->
-    <div class="hero__bg" style="background-image: url('hero.png'); background-size: cover; background-position: center right;">
+    <div class="hero__bg">
+      <img src="hero.png" alt="Memória 4K Hero">
     </div>
-    
     <div class="hero__content">
       <div class="hero__text">
         <div class="hero__badge">
           <div class="hero__badge-dot"></div>
-          Atendimento online 24h
+          Atendimento Personalizado
         </div>
-
-        <h1 class="reveal" style="transition-delay: 0s;">MemÃ³rias que atravessam o <em>tempo.</em></h1>
-
-        <p class="hero__subtitle reveal" style="transition-delay: 0.1s;">Transforme fotos antigas ou crie ensaios impossÃ­veis da sua famÃ­lia. Qualidade Ultra 4K. Sem mensalidade.</p>
-
-        <a href="#catalogo" class="hero__cta reveal" style="transition-delay: 0.2s;">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
-          Explorar CatÃ¡logo
-        </a>
-      </div>
-    </div>
-    
-    <!-- Floating stats on hero right -->
-    <div class="hero__stats">
-      <div class="hero__stat reveal">
-        <div class="hero__stat-number">4K</div>
-        <div class="hero__stat-label">Ultra resoluÃ§Ã£o</div>
-      </div>
-      <div class="hero__stat reveal" style="transition-delay: 0.1s;">
-        <div class="hero__stat-number">24h</div>
-        <div class="hero__stat-label">Prazo de entrega</div>
-      </div>
-      <div class="hero__stat reveal" style="transition-delay: 0.2s;">
-        <div class="hero__stat-number">0</div>
-        <div class="hero__stat-label">Mensalidades</div>
+        <h1 class="reveal">Memórias que atravessam o <em>tempo.</em></h1>
+        <p class="hero__subtitle reveal">Transforme fotos ou crie ensaios impossíveis com IA de fidelidade 8K. Qualidade cinematográfica sem sair de casa.</p>
+        <a href="#catalogo" class="hero__cta reveal">Explorar Catálogo</a>
       </div>
     </div>
   </header>
 
-  <!-- ============================================
-       SEÃ‡ÃƒO A: ENSAIOS TEMÃTICOS (12 itens)
-       ============================================ -->
+  <!-- ENSAIOS TEMÁTICOS -->
   <section class="catalog-section bg-textured" id="catalogo">
     <div class="container">
       <div class="catalog-header reveal">
-        <p style="font-size: 13px; font-weight: 600; color: var(--terracotta); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 12px;">Descubra novos mundos</p>
-        <h2>Ensaios <em>TemÃ¡ticos</em></h2>
-        <p style="color: var(--text-on-light-muted); max-width: 600px; margin: 0 auto;">CenÃ¡rios surreais, iluminaÃ§Ã£o de Hollywood e figurino de cinema. Escolha o seu prÃ³ximo destino.</p>
+        <p class="section-eyebrow">Descubra novos mundos</p>
+        <h2 class="section-title">Ensaios <em>Temáticos</em></h2>
+        <p class="catalog-subtitle">Cenários épicos e iluminação de Hollywood. Escolha o seu próximo destino.</p>
       </div>
-
-      <div class="catalog-grid" id="grid-tematicos">
-        <!-- Renderizado dinamicamente pelo main.js -->
-      </div>
+      <div class="catalog-grid" id="grid-tematicos"></div>
     </div>
   </section>
 
-  <!-- ============================================
-       SEÃ‡ÃƒO B: RESTAURAÃ‡ÃƒO (3 itens)
-       ============================================ -->
+  <!-- ELITE & SUCESSO -->
+  <section class="catalog-section" id="lifestyle">
+    <div class="container">
+      <div class="catalog-header reveal">
+        <p class="section-eyebrow" style="color: var(--amber);">Status & Autoridade</p>
+        <h2 class="catalog-title">Elite & <em>Sucesso</em></h2>
+        <p class="catalog-subtitle">Personal branding e lifestyle de luxo em altíssima resolução.</p>
+      </div>
+      <div class="catalog-grid" id="grid-lifestyle"></div>
+    </div>
+  </section>
+
+  <!-- RESTAURAÇÃO -->
   <section class="catalog-section dark" id="restauracao">
     <div class="container">
       <div class="catalog-header reveal">
-        <p style="font-size: 13px; font-weight: 600; color: var(--pale-teal); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 12px;">Preserve sua histÃ³ria</p>
-        <h2>RestauraÃ§Ã£o e <em>Upscale</em></h2>
-        <p style="color: var(--text-on-dark-muted); max-width: 600px; margin: 0 auto;">Recupere fotos antigas rasgadas ou sem cor, transformando-as em heranÃ§as digitais deslumbrantes.</p>
+        <p class="section-eyebrow">Preserve sua história</p>
+        <h2 class="section-title">Restauração & <em>Upscale</em></h2>
+        <p class="catalog-subtitle">Recupere fotos antigas e preserve o legado da sua família em 4K.</p>
       </div>
-
-      <div class="catalog-grid" id="grid-restauracao">
-        <!-- Renderizado dinamicamente pelo main.js -->
-      </div>
+      <div class="catalog-grid" id="grid-restauracao"></div>
     </div>
   </section>
 
-  <!-- ============================================
-       COMO FUNCIONA â€” 3 PASSOS
-       ============================================ -->
+  <!-- COMO FUNCIONA -->
   <section class="how-it-works" id="como-funciona">
     <div class="container">
       <div class="reveal">
-        <p class="section-eyebrow">Como funciona</p>
+        <p class="section-eyebrow">Processo Pluma</p>
         <h2 class="section-title">Simples como <em>uma conversa.</em></h2>
       </div>
-
       <div class="steps">
-        <div class="step reveal" style="transition-delay: 0s;">
+        <div class="step reveal">
           <div class="step__number">01</div>
           <h3 class="step__title">Escolha e envie</h3>
-          <p class="step__desc">Escolha seu pacote e envie suas fotos pelo WhatsApp. Sem cadastro, sem formulÃ¡rio.</p>
+          <p class="step__desc">Selecione seu pacote e envie suas fotos pelo WhatsApp. Sem cadastros complexos.</p>
         </div>
-
-        <div class="step reveal" style="transition-delay: 0.12s;">
+        <div class="step reveal">
           <div class="step__number">02</div>
-          <h3 class="step__title">Criamos em 4K</h3>
-          <p class="step__desc">Nossa equipe gera suas imagens com inteligÃªncia artificial em qualidade Ultra 4K.</p>
+          <h3 class="step__title">Produção 8K</h3>
+          <p class="step__desc">Nossa IA de última geração gera seus retratos com fidelidade absoluta.</p>
         </div>
-
-        <div class="step reveal" style="transition-delay: 0.24s;">
+        <div class="step reveal">
           <div class="step__number">03</div>
           <h3 class="step__title">Receba em 24h</h3>
-          <p class="step__desc">VocÃª recebe as fotos prontas para imprimir, emoldurar ou compartilhar. Em atÃ© 24 horas.</p>
+          <p class="step__desc">Suas memórias prontas para emoldurar ou postar, enviadas em até um dia.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ============================================
-       DEPOIMENTOS 
-       ============================================ -->
+  <!-- DEPOIMENTOS -->
   <section class="testimonials" id="depoimentos">
     <div class="container">
       <div class="reveal">
         <p class="section-eyebrow">Depoimentos</p>
         <h2 class="section-title">Quem viveu, <em>recomenda.</em></h2>
       </div>
-
       <div class="testimonials__grid">
-        <div class="testimonial-card reveal" style="transition-delay: 0s;">
-          <div class="testimonial-card__stars">â˜…â˜…â˜…â˜…â˜…</div>
-          <p class="testimonial-card__quote">"Minha avÃ³ chorou ao ver a foto restaurada. Parecia que ela tinha voltado no tempo. IncrÃ­vel."</p>
+        <div class="testimonial-card reveal">
+          <div class="testimonial-card__stars">★★★★★</div>
+          <p class="testimonial-card__quote">"Minha avó chorou ao ver a foto restaurada. Parecia que ela tinha voltado no tempo. Incrível."</p>
           <div class="testimonial-card__author">
             <div class="testimonial-card__avatar">M</div>
             <div>
               <div class="testimonial-card__name">Maria S.</div>
-              <div class="testimonial-card__role">RestauraÃ§Ã£o Ultra</div>
+              <div class="testimonial-card__role">Restauração Ultra</div>
             </div>
           </div>
         </div>
-
-        <div class="testimonial-card reveal" style="transition-delay: 0.1s;">
-          <div class="testimonial-card__stars">â˜…â˜…â˜…â˜…â˜…</div>
-          <p class="testimonial-card__quote">"Dei de presente pro meu filho. Ele se viu na Disney e nÃ£o acreditou. A qualidade Ã© absurda."</p>
+        <div class="testimonial-card reveal">
+          <div class="testimonial-card__stars">★★★★★</div>
+          <p class="testimonial-card__quote">"O nível de realismo é assustador. Fiz o corporativo e o resultado foi melhor que estúdio físico."</p>
           <div class="testimonial-card__author">
             <div class="testimonial-card__avatar">R</div>
             <div>
-              <div class="testimonial-card__name">Rafael O.</div>
-              <div class="testimonial-card__role">Disney MÃ¡gica</div>
+              <div class="testimonial-card__name">Ricardo A.</div>
+              <div class="testimonial-card__role">Líder Corporativo</div>
             </div>
           </div>
         </div>
-
-        <div class="testimonial-card reveal" style="transition-delay: 0.2s;">
-          <div class="testimonial-card__stars">â˜…â˜…â˜…â˜…â˜…</div>
-          <p class="testimonial-card__quote">"Fiz o Tapete Vermelho pra minha esposa. Ela amou! Pareceu capa de revista. Super rÃ¡pido."</p>
+        <div class="testimonial-card reveal">
+          <div class="testimonial-card__stars">★★★★★</div>
+          <p class="testimonial-card__quote">"Finalmente um serviço que entrega o que promete. As fotos são obras de arte."</p>
           <div class="testimonial-card__author">
             <div class="testimonial-card__avatar">L</div>
             <div>
-              <div class="testimonial-card__name">Lucas P.</div>
-              <div class="testimonial-card__role">Tapete Vermelho</div>
+              <div class="testimonial-card__name">Lara M.</div>
+              <div class="testimonial-card__role">Viagem a Paris</div>
             </div>
           </div>
         </div>
@@ -283,70 +191,40 @@
     </div>
   </section>
 
-  <!-- ============================================
-       CTA FINAL
-       ============================================ -->
-  <section class="cta-final" id="cta">
+  <!-- CTA FINAL -->
+  <section class="cta-final">
     <div class="container">
       <div class="reveal">
-        <p class="section-eyebrow" style="color: var(--pale-teal);">Comece agora</p>
-        <h2 class="section-title">Pronto para reviver suas <em>memÃ³rias?</em></h2>
-        <p class="cta-final__subtitle">Sem cadastro. Sem mensalidade. Fale diretamente conosco pelo WhatsApp e receba seu orÃ§amento em minutos.</p>
-      </div>
-
-      <div class="cta-final__benefits reveal" style="transition-delay: 0.1s;">
-        <div class="cta-final__benefit">
-          <span class="cta-final__benefit-icon">âœ“</span>
-          Qualidade Ultra 4K
-        </div>
-        <div class="cta-final__benefit">
-          <span class="cta-final__benefit-icon">âœ“</span>
-          Entrega em 24h
-        </div>
-        <div class="cta-final__benefit">
-          <span class="cta-final__benefit-icon">âœ“</span>
-          Pagamento Ãºnico
-        </div>
-      </div>
-
-      <div class="reveal" style="transition-delay: 0.2s;">
-        <a href="https://wa.me/5511915101982?text=OlÃ¡! Quero meu orÃ§amento do MemÃ³ria 4K." target="_blank" rel="noopener" class="cta-final__button">
-          Quero meu orÃ§amento agora
+        <h2 class="section-title">Pronto para elevar seu <em>legado?</em></h2>
+        <p class="cta-final__subtitle">Fale diretamente conosco e receba seu orçamento personalizado agora.</p>
+        <a href="https://wa.me/5511915101982?text=Olá! Quero meu orçamento do Memória 4K." target="_blank" rel="noopener" class="cta-final__button">
+          Falar no WhatsApp agora
         </a>
       </div>
     </div>
   </section>
 
-  <!-- ============================================
-       FOOTER
-       ============================================ -->
+  <!-- FOOTER -->
   <footer class="footer">
     <div class="footer__inner">
       <div class="footer__logo">
-        <div class="footer__logo-icon">âœ¦</div>
-        MemÃ³ria 4K
+        <div class="footer__logo-icon">✦</div>
+        Memória 4K
       </div>
-      <ul class="footer__links">
-        <li><a href="#">Termos de Uso</a></li>
-        <li><a href="#">PolÃ­tica de Privacidade</a></li>
-      </ul>
-      <span class="footer__copy">Â© 2026 MemÃ³ria 4K. Todos os direitos reservados.</span>
+      <span class="footer__copy">© 2026 Memória 4K. Todos os direitos reservados.</span>
     </div>
   </footer>
 
-  <!-- ============================================
-       WHATSAPP FLOATING BUTTON (Pluma Component)
-       ============================================ -->
-  <a href="https://wa.me/5511915101982?text=OlÃ¡! Vi o site do MemÃ³ria 4K e quero saber mais." target="_blank" rel="noopener noreferrer" class="whatsapp-fab" aria-label="Falar no WhatsApp">
+  <!-- WHATSAPP FAB -->
+  <a href="https://wa.me/5511915101982?text=Olá! Vim pelo site e quero saber mais." target="_blank" rel="noopener noreferrer" class="whatsapp-fab">
     <span class="whatsapp-fab__label">Falar no WhatsApp</span>
     <div class="whatsapp-fab__btn">
       <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
     </div>
   </a>
 
-  <!-- SCRIPTS GLOBAIS -->
-  <script src="js/data.js?v=1776616846,32132"></script>
-  <script src="js/main.js?v=1776616846,32132"></script>
+  <!-- SCRIPTS -->
+  <script src="js/data.js?v=1.0.4"></script>
+  <script src="js/main.js?v=1.0.4"></script>
 </body>
 </html>
-

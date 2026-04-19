@@ -1,20 +1,30 @@
 document.addEventListener("DOMContentLoaded", () => {
   // 1. CATALOG RENDERING (If we are on index.html)
   const gridTematicos = document.getElementById('grid-tematicos');
+  const gridLifestyle = document.getElementById('grid-lifestyle');
   const gridRestauracao = document.getElementById('grid-restauracao');
 
-  if (gridTematicos && gridRestauracao && typeof catalogData !== 'undefined') {
-    // Render Ensaios Temáticos
-    catalogData.tematicos.forEach((item, index) => {
-      const delay = (index % 3) * 0.1;
-      gridTematicos.innerHTML += createCardHTML(item, delay);
-    });
+  if (typeof catalogData !== 'undefined') {
+    if (gridTematicos) {
+      catalogData.tematicos.forEach((item, index) => {
+        const delay = (index % 3) * 0.1;
+        gridTematicos.innerHTML += createCardHTML(item, delay);
+      });
+    }
 
-    // Render Restauração
-    catalogData.restauracao.forEach((item, index) => {
-      const delay = (index % 3) * 0.1;
-      gridRestauracao.innerHTML += createCardHTML(item, delay);
-    });
+    if (gridLifestyle) {
+      catalogData.lifestyle.forEach((item, index) => {
+        const delay = (index % 3) * 0.1;
+        gridLifestyle.innerHTML += createCardHTML(item, delay);
+      });
+    }
+
+    if (gridRestauracao) {
+      catalogData.restauracao.forEach((item, index) => {
+        const delay = (index % 3) * 0.1;
+        gridRestauracao.innerHTML += createCardHTML(item, delay);
+      });
+    }
   }
 
   // 2. SCROLL REVEAL OBSERVER
@@ -42,15 +52,23 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // HIDDEN ADMIN ACCESS EGG
-  let secretClicks = 0;
-  const logoSecret = document.querySelector('.navbar__logo-icon, .footer__logo-icon'); // Try header or footer icon
-  if (logoSecret) {
-    logoSecret.addEventListener('click', () => {
-      secretClicks++;
-      if (secretClicks === 5) {
-        window.location.href = 'admin.html';
-      }
+    });
+  }
+
+  // MOBILE MENU TOGGLE
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('nav-links');
+
+  if (hamburger && navLinks) {
+    hamburger.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+
+    // Close menu when a link is clicked
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+      });
     });
   }
 

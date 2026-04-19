@@ -1,327 +1,80 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Oficina (Painel Admin) â€” MemÃ³ria 4K</title>
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
-  
-  <link rel="stylesheet" href="css/style.css?v=1776616846,32132">
+  <title>Oficina Memória 4K — Admin</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
-    .status-badge { display: inline-block; padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; text-transform: uppercase; }
-    .status-pendente { background: rgba(212,136,90,0.2); color: var(--amber); }
-    .status-concluido { background: rgba(37,211,102,0.2); color: var(--success); }
-    
-    .privacy-notice { background: rgba(217, 83, 79, 0.1); border: 1px solid rgba(217, 83, 79, 0.3); padding: 12px; border-radius: 8px; font-size: 13px; color: #ff8c8a; margin-bottom: 24px; display: flex; align-items: flex-start; gap: 8px;}
-    
-    .thumb-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(60px, 1fr)); gap: 8px; margin-top: 12px;}
-    .thumb-grid img { width: 100%; height: 60px; object-fit: cover; border-radius: 4px; border: 1px solid rgba(255,255,255,0.2);}
-    
-    .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(4px); z-index: 9999; align-items: center; justify-content: center; padding: 20px;}
-    .modal.active { display: flex; }
-    .modal-content { background: var(--dark-bg); border: 1px solid rgba(255,255,255,0.1); padding: 32px; border-radius: 16px; width: 100%; max-width: 600px; max-height: 90vh; overflow-y: auto;}
-    .modal-close { float: right; background: none; border: none; color: white; font-size: 24px; cursor: pointer;}
+    :root { --dark-bg: #0F1A15; --white: #FFFFFF; --terracotta: #C26A40; --amber: #D4885A; --forest-deep: #1C3F3A; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--dark-bg); color: var(--white); margin: 0; padding: 40px; }
+    .admin-container { max-width: 900px; margin: 0 auto; }
+    .glass-card { background: rgba(255,255,255,0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 40px; margin-bottom: 24px; text-align: center; }
+    h1 { font-weight: 500; letter-spacing: -1px; }
+    input { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2); background: rgba(0,0,0,0.3); color: white; margin-bottom: 20px; font-size: 16px; box-sizing: border-box; }
+    button { background: var(--terracotta); color: white; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; font-weight: 600; width: 100%; font-size: 16px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 40px; }
+    th, td { padding: 12px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.1); font-size: 14px; }
+    th { color: var(--amber); text-transform: uppercase; }
   </style>
 </head>
-<body class="dark-mode">
-
-  <nav class="navbar" style="position: absolute;">
-    <div class="navbar__logo"><div class="navbar__logo-icon">âœ¦</div> Oficina | MemÃ³ria 4K</div>
-    <a href="index.html" class="navbar__cta" style="background: transparent; color: white; border: 1px solid rgba(255,255,255,0.2);">Sair</a>
-  </nav>
-
-  <main class="container admin-layout">
-    
-    <!-- LOGIN -->
-    <div id="admin-login-view" class="admin-glass">
-      <h2 style="font-family: var(--font-display); margin-bottom: 24px;">Oficina Restrita</h2>
-      <form id="login-form">
-        <div class="form-group">
-          <label>Senha de Acesso</label>
-          <input type="password" id="admin-pass" class="form-control" autocomplete="off" required>
-        </div>
-        <p id="login-error" style="color: var(--error); font-size: 12px; margin-bottom: 16px; display: none;">Senha incorreta.</p>
-        <button type="submit" class="btn-admin">Autenticar</button>
-      </form>
-    </div>
-
-    <!-- DASHBOARD -->
-    <div id="admin-dashboard-view" class="hidden">
+<body>
+  <div class="admin-container">
+    <div class="glass-card">
+      <h1>Oficina <em>Memória 4K</em></h1>
+      <p>Gerenciamento de Ativos e Prompts de IA.</p>
       
-      <div class="privacy-notice">
-        <span>âš ï¸</span>
-        <div>
-          <strong>AtenÃ§Ã£o Ã  Privacidade:</strong> Todas as fotos enviadas pelos clientes sÃ£o armazenadas exclusivamente de forma <b>local</b> no disco rÃ­gido do dispositivo atual atravÃ©s de IndexedDB, simulando a seguranÃ§a criptogrÃ¡fica. <b>Nunca enviaremos fotos em base64 nÃ£o criptografada para servidores externos.</b> Ã‰ seu dever Apagar/Concluir o pedido apÃ³s o tratamento para expurgar as imagens locais.
-        </div>
+      <div id="login-form">
+        <input type="password" id="admin-pass" placeholder="Senha mística de acesso">
+        <button id="login-btn">Entrar na Oficina</button>
       </div>
 
-      <h1 class="page-title" style="text-align: left; font-size: 36px; margin-bottom: 32px;">Gestor de <em>Pedidos</em></h1>
-
-      <div class="admin-grid">
-        <!-- Esquerda: FormulÃ¡rio Novo Pedido -->
-        <div class="admin-sidebar">
-          <div class="admin-glass">
-            <h3 style="margin-bottom: 20px; font-size: 18px;">Ingressar Novo Pedido</h3>
-            <form id="form-novo-pedido">
-              <div class="form-group">
-                <label>Nome do Cliente</label>
-                <input type="text" id="p-cliente" class="form-control" required>
-              </div>
-              <div class="form-group">
-                <label>WhatsApp</label>
-                <input type="text" id="p-wpp" class="form-control" placeholder="11999999999" required>
-              </div>
-              <div class="form-group">
-                <label>Pacote Selecionado</label>
-                <select id="p-pacote" class="form-control" required></select>
-              </div>
-              <div class="form-group">
-                <label>Quantidade de Fotos do Combo</label>
-                <select id="p-qtd" class="form-control" required>
-                  <option value="3">3 Fotos (Ensaio/Rest)</option>
-                  <option value="5">5 Fotos (Ensaio/Rest)</option>
-                  <option value="10">10 Fotos (Ensaio)</option>
-                  <option value="1">1 Foto (RestauraÃ§Ã£o)</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label>Upload de Fotos Base (MÃ­n 4 un.)</label>
-                <input type="file" id="p-fotos" class="form-control" accept=".jpg,.jpeg,.png" multiple required style="background: transparent; padding:0; border: none; margin-top:5px;">
-                <p style="font-size: 11px; margin-top:4px; color:var(--text-on-dark-muted)">As fotos nÃ£o farÃ£o upload para nuvem. Ficam retidas localmente.</p>
-              </div>
-              <div class="form-group" style="display:flex; align-items:flex-start; gap:8px;">
-                <input type="checkbox" id="p-aviso" required>
-                <label for="p-aviso" style="line-height:1.2; margin:0">O cliente foi devidamente avisado que as fotos serÃ£o apagadas apÃ³s a entrega.</label>
-              </div>
-              <button type="submit" class="btn-admin" id="btn-submit-pedido" style="margin-top: 10px;">Adicionar Pedido</button>
-            </form>
-          </div>
-        </div>
-
-        <!-- Direita: Tabela -->
-        <div class="admin-main">
-          <div class="admin-glass" style="padding: 0; overflow: hidden;">
-            <div class="table-wrapper">
-              <table id="tabela-pedidos">
-                <thead style="background: rgba(0,0,0,0.2);">
-                  <tr>
-                    <th>ID</th>
-                    <th>Cliente</th>
-                    <th>Pacote</th>
-                    <th>Status</th>
-                    <th>AÃ§Ãµes</th>
-                  </tr>
-                </thead>
-                <tbody id="pedidos-body"></tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </main>
-
-  <!-- MODAL NANO BANANA -->
-  <div class="modal" id="modal-banana">
-    <div class="modal-content">
-      <button class="modal-close" onclick="closeModal()">Ã—</button>
-      <h3 style="margin-bottom: 8px;">Ãrea de Prompt (Nano Banana)</h3>
-      <p style="font-size: 13px; color:var(--text-on-dark-muted); margin-bottom: 24px;">Abra o Nano Banana, cole este prompt na primeira aba e anexe as miniaturas mostradas abaixo.</p>
-      
-      <textarea id="prompt-displayer" class="form-control" readonly style="height: 140px; margin-bottom: 16px; background: rgba(0,0,0,0.5);"></textarea>
-      
-      <button class="btn-admin" id="btn-copy-prompt" style="background: var(--teal-blue); margin-bottom: 24px;">Copiar Prompt Completo</button>
-
-      <h4 style="font-size: 14px; margin-bottom: 8px;">MÃ­dia do Cliente para Anexo:</h4>
-      <div class="thumb-grid" id="modal-thumbs"></div>
-      
-      <div style="margin-top: 32px; padding-top: 16px; border-top: 1px dashed rgba(255,255,255,0.2); text-align: right;">
-        <button class="btn-admin" id="btn-concluir-pedido" style="background: #25D366; width: auto;">Concluir Pedido e Expurgar Fotos</button>
+      <div id="admin-panel" style="display:none;">
+        <table>
+          <thead>
+            <tr>
+              <th>Pacote</th>
+              <th>Status Imagens</th>
+              <th>Prompt Base</th>
+            </tr>
+          </thead>
+          <tbody id="admin-table-body">
+            <!-- Populado via JS -->
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
 
-  <script src="js/data.js?v=1776616846,32132"></script>
+  <script src="js/data.js"></script>
   <script>
-    const passCorrect = "memoria4k2026";
-    let db;
-    let selectedPedidoId = null;
+    const loginBtn = document.getElementById('login-btn');
+    const adminPass = document.getElementById('admin-pass');
+    const loginForm = document.getElementById('login-form');
+    const adminPanel = document.getElementById('admin-panel');
+    const tableBody = document.getElementById('admin-table-body');
 
-    // --- IndexedDB Wrapper ---
-    const request = indexedDB.open("Memoria4K_DB_Fase3", 1);
-    request.onupgradeneeded = (e) => {
-      db = e.target.result;
-      if (!db.objectStoreNames.contains('pedidos')) {
-        db.createObjectStore('pedidos', { keyPath: 'id', autoIncrement: true });
-      }
-    };
-    request.onsuccess = (e) => {
-      db = e.target.result;
-    };
-
-    document.addEventListener("DOMContentLoaded", () => {
-      // Auth
-      document.getElementById('login-form').addEventListener('submit', (e) => {
-        e.preventDefault();
-        if(document.getElementById('admin-pass').value === passCorrect) {
-          document.getElementById('admin-login-view').classList.add('hidden');
-          document.getElementById('admin-dashboard-view').classList.remove('hidden');
-          initDashboard();
-        } else {
-          document.getElementById('login-error').style.display = 'block';
-        }
-      });
-    });
-
-    function initDashboard() {
-      // Popula pacotes
-      const select = document.getElementById('p-pacote');
-      [...catalogData.tematicos, ...catalogData.restauracao].forEach(p => {
-        const opt = document.createElement('option');
-        opt.value = p.id;
-        opt.textContent = p.title;
-        select.appendChild(opt);
-      });
-      refreshTable();
-    }
-
-    function refreshTable() {
-      const tx = db.transaction('pedidos', 'readonly');
-      const req = tx.objectStore('pedidos').getAll();
-      req.onsuccess = () => {
-        const tbody = document.getElementById('pedidos-body');
-        tbody.innerHTML = '';
-        const pedidos = req.result;
-        
-        if (pedidos.length === 0) {
-          tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; padding: 24px; color: gray;">Nenhum pedido na oficina.</td></tr>';
-          return;
-        }
-
-        pedidos.forEach(p => {
-          const statusClass = p.status === 'ConcluÃ­do' ? 'status-concluido' : 'status-pendente';
-          const tr = document.createElement('tr');
-          tr.innerHTML = `
-            <td>#${p.id}</td>
-            <td style="font-weight: 500;">${p.cliente}</td>
-            <td>${p.pacoteNome} (${p.qtd}X)</td>
-            <td><span class="status-badge ${statusClass}">${p.status}</span></td>
-            <td>
-              ${p.status === 'Pendente' 
-                ? `<button class="action-btn" onclick="openModal(${p.id})">Gerar Prompt / MÃ­dia</button>`
-                : `<span style="font-size:11px; opacity:0.5">- Expurgado -</span>`
-              }
-            </td>
-          `;
-          tbody.appendChild(tr);
-        });
-      };
-    }
-
-    // FormulÃ¡rio Novo Pedido
-    document.getElementById('form-novo-pedido').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const files = document.getElementById('p-fotos').files;
-      if (files.length < 4) {
-        alert("O sistema necessita de no mÃ­nimo 4 fotos (Ã¢ngulos) do cliente.");
-        return;
-      }
-      const btn = document.getElementById('btn-submit-pedido');
-      btn.textContent = "Processando B64...";
-      btn.disabled = true;
-
-      const funcsBase64 = Array.from(files).map(file => {
-        return new Promise((resolve, reject) => {
-          const reader = new FileReader();
-          reader.onload = e => resolve(e.target.result);
-          reader.onerror = e => reject(e);
-          reader.readAsDataURL(file);
-        });
-      });
-      const fotosB64 = await Promise.all(funcsBase64);
-      
-      const selectPacote = document.getElementById('p-pacote');
-      const itemCatalogo = getPackageById(selectPacote.value);
-
-      const novoPedido = {
-        cliente: document.getElementById('p-cliente').value,
-        wpp: document.getElementById('p-wpp').value,
-        pacoteId: selectPacote.value,
-        pacoteNome: selectPacote.options[selectPacote.selectedIndex].text,
-        qtd: document.getElementById('p-qtd').value,
-        status: 'Pendente',
-        fotosBase64: fotosB64,
-        aiPrompt: itemCatalogo.aiPrompt
-      };
-
-      const tx = db.transaction('pedidos', 'readwrite');
-      tx.objectStore('pedidos').add(novoPedido);
-      tx.oncomplete = () => {
-        btn.textContent = "Adicionar Pedido";
-        btn.disabled = false;
-        document.getElementById('form-novo-pedido').reset();
-        refreshTable();
-      };
-    });
-
-    // LÃ³gica do Modal
-    function openModal(id) {
-      selectedPedidoId = id;
-      const tx = db.transaction('pedidos', 'readonly');
-      tx.objectStore('pedidos').get(id).onsuccess = (e) => {
-        const p = e.target.result;
-        if(!p) return;
-        
-        let promptText = p.aiPrompt || "Prompt nÃ£o definido no data.js";
-        const instr = `--- PROMPT NANO BANANA ---\n\nTARGET PERSON: Cliente ${p.cliente}\n\n[PROMPT DE GERAÃ‡ÃƒO]:\n${promptText} [Utilize modelo de base fotorrealista]\n\n[INSTRUÃ‡ÃƒO DE LORA/FACE SWAP]:\nBaseado nas ${p.fotosBase64.length} imagens em anexo, transfira a identidade facial com 100% de semelhanÃ§a orgÃ¢nica.\n[QTD DE SAÃDAS ESTIPULADAS]: ${p.qtd}`;
-        document.getElementById('prompt-displayer').value = instr;
-
-        const grid = document.getElementById('modal-thumbs');
-        grid.innerHTML = '';
-        if(p.fotosBase64) {
-          p.fotosBase64.forEach(b64 => {
-            const img = document.createElement('img');
-            img.src = b64;
-            grid.appendChild(img);
-          });
-        }
-        document.getElementById('modal-banana').classList.add('active');
-      };
-    }
-
-    function closeModal() {
-      document.getElementById('modal-banana').classList.remove('active');
-      selectedPedidoId = null;
-    }
-
-    document.getElementById('btn-copy-prompt').addEventListener('click', () => {
-      const ta = document.getElementById('prompt-displayer');
-      ta.select();
-      document.execCommand('copy');
-      alert("Prompt copiado!");
-    });
-
-    document.getElementById('btn-concluir-pedido').addEventListener('click', () => {
-      if(!selectedPedidoId) return;
-      if(confirm("Confirmar a conclusÃ£o do pedido farÃ¡ a exclusÃ£o segura e IMBURKÃVEL de todas as imagens Base64 armazenadas no banco de memÃ³ria IndexDB no cliente local. Prosseguir?")) {
-        const tx = db.transaction('pedidos', 'readwrite');
-        const store = tx.objectStore('pedidos');
-        store.get(selectedPedidoId).onsuccess = (e) => {
-          const p = e.target.result;
-          p.status = 'ConcluÃ­do';
-          p.fotosBase64 = null; // expurga memoria
-          store.put(p);
-        };
-        tx.oncomplete = () => {
-          closeModal();
-          refreshTable();
-        }
+    loginBtn.addEventListener('click', () => {
+      if (adminPass.value === 'memoria4k2026') {
+        loginForm.style.display = 'none';
+        adminPanel.style.display = 'block';
+        loadAdmin();
+      } else {
+        alert('Acesso negado.');
       }
     });
+
+    function loadAdmin() {
+      const all = [...catalogData.tematicos, ...catalogData.lifestyle, ...catalogData.restauracao];
+      tableBody.innerHTML = all.map(p => `
+        <tr>
+          <td>${p.title}</td>
+          <td><span style="color: ${p.gallery.includes(p.placeholderImg) ? '#ff9800' : '#4caf50'}">${p.gallery.includes(p.placeholderImg) ? 'Pendente' : 'Completo'}</span></td>
+          <td style="font-size: 10px; color: rgba(255,255,255,0.5);">${p.aiPrompt.substring(0, 50)}...</td>
+        </tr>
+      `).join('');
+    }
   </script>
 </body>
 </html>
-

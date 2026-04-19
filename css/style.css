@@ -161,9 +161,48 @@ img {
   color: var(--white);
 }
 
-@media (max-width: 768px) {
-  .navbar__links { display: none; }
+@media (max-width: 900px) {
+  .navbar__links { 
+    position: absolute;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    background: rgba(15, 26, 21, 0.98);
+    flex-direction: column;
+    padding: 32px;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.1);
+    display: none; 
+    gap: 20px;
+    text-align: center;
+  }
+  .navbar__links.active {
+    display: flex;
+  }
   .navbar { padding: 10px 16px; width: calc(100% - 32px); }
+  .navbar__hamburger {
+    display: flex;
+  }
+  .navbar__cta {
+    display: none; /* Hide on small screens to favor menu */
+  }
+}
+
+.navbar__hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.navbar__hamburger span {
+  width: 24px;
+  height: 2px;
+  background: white;
+  border-radius: 2px;
+  transition: all 0.3s ease;
 }
 
 /* ============================================
@@ -211,6 +250,17 @@ img {
   color: var(--text-on-dark-muted);
   max-width: 600px;
   margin: 0 auto;
+  line-height: 1.5;
+}
+
+#lifestyle {
+  background: #fdfaf5;
+  border-top: 1px solid rgba(0,0,0,0.05);
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+#lifestyle .catalog-title em {
+  color: var(--amber);
 }
 
 /* ============================================
@@ -262,8 +312,14 @@ img {
 
 .catalog-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 32px;
+}
+
+@media (max-width: 480px) {
+  .catalog-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* Reusing package-card styling from phase 1 but optimizing */
