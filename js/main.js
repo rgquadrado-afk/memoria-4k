@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (typeof catalogData !== 'undefined') {
     if (gridTematicos) {
+      gridTematicos.innerHTML = '';
       catalogData.tematicos.forEach((item, index) => {
         const delay = (index % 3) * 0.1;
         gridTematicos.innerHTML += createCardHTML(item, delay);
@@ -13,6 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     if (gridLifestyle) {
+      gridLifestyle.innerHTML = '';
       catalogData.lifestyle.forEach((item, index) => {
         const delay = (index % 3) * 0.1;
         gridLifestyle.innerHTML += createCardHTML(item, delay);
@@ -20,11 +22,33 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     if (gridRestauracao) {
+      gridRestauracao.innerHTML = '';
       catalogData.restauracao.forEach((item, index) => {
         const delay = (index % 3) * 0.1;
         gridRestauracao.innerHTML += createCardHTML(item, delay);
       });
     }
+  }
+
+  // MOBILE MENU TOGGLE
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('nav-links');
+
+  if (hamburger && navLinks) {
+    hamburger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      navLinks.classList.toggle('active');
+    });
+
+    document.addEventListener('click', () => {
+      navLinks.classList.remove('active');
+    });
+
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+      });
+    });
   }
 
   // 2. SCROLL REVEAL OBSERVER
@@ -44,159 +68,95 @@ document.addEventListener("DOMContentLoaded", () => {
   const navbar = document.querySelector('.navbar');
   if (navbar) {
     window.addEventListener('scroll', () => {
-      if (window.scrollY > 50) {
-        navbar.classList.add('scrolled');
-      } else {
-        navbar.classList.remove('scrolled');
-      }
+      if (window.scrollY > 50) navbar.classList.add('scrolled');
+      else navbar.classList.remove('scrolled');
     });
   }
 
-    });
-  }
-
-  // MOBILE MENU TOGGLE
-  const hamburger = document.getElementById('hamburger');
-  const navLinks = document.getElementById('nav-links');
-
-  if (hamburger && navLinks) {
-    hamburger.addEventListener('click', () => {
-      navLinks.classList.toggle('active');
-    });
-
-    // Close menu when a link is clicked
-    navLinks.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        navLinks.classList.remove('active');
-      });
-    });
-  }
-
-  // 3. DETAILS PAGE RENDERING (If we are on detalhe.html)
-  const detailContainer = document.getElementById('detail-content');
-  if (detailContainer && typeof getPackageById !== 'undefined') {
+  // 3. DETAILS PAGE RENDERING
+  const detailTitle = document.getElementById('detail-title');
+  if (detailTitle && typeof getPackageById !== 'undefined') {
     const params = new URLSearchParams(window.location.search);
     const pacoteId = params.get('pacote');
-    
-    if (!pacoteId) {
-      window.location.href = 'index.html'; // Fallback se não tiver id
-      return;
-    }
-
     const item = getPackageById(pacoteId);
-    if (!item) {
-      window.location.href = 'index.html'; // Fallback se ID inválido
-      return;
-    }
 
-    // Populate the detail page
-    const spaceIndex = item.title.indexOf(' ');
-    if (spaceIndex !== -1) {
-      document.getElementById('detail-title').innerHTML = `<em>${item.title.substring(0, spaceIndex)}</em> ${item.title.substring(spaceIndex + 1)}`;
-    } else {
-      document.getElementById('detail-title').innerHTML = `<em>${item.title}</em>`;
-    }
-    document.getElementById('detail-desc').textContent = item.fullDesc;
-    
-    // Gallery with real images
-    const mainImg = document.getElementById('main-gallery-img');
-    mainImg.src = item.gallery[0];
-    mainImg.alt = item.title;
-    mainImg.style.width = '100%';
-    mainImg.style.height = '100%';
-    mainImg.style.objectFit = 'cover';
-    mainImg.style.borderRadius = '12px';
+    if (item) {
+      // Title
+      const spaceIndex = item.title.indexOf(' ');
+      if (spaceIndex !== -1) {
+        detailTitle.innerHTML = `<em>${item.title.substring(0, spaceIndex)}</em> ${item.title.substring(spaceIndex + 1)}`;
+      } else {
+        detailTitle.innerHTML = `<em>${item.title}</em>`;
+      }
 
-    // Insert comment before the image
-    const promptTextMain = item.galleryPrompts && item.galleryPrompts[0] ? item.galleryPrompts[0] : '';
-    mainImg.insertAdjacentHTML('beforebegin', `<!-- PROMPT_IMAGEM: ${promptTextMain} -->\n`);
-
-    const thumbContainer = document.getElementById('thumb-container');
-    thumbContainer.innerHTML = '';
-    
-    item.gallery.forEach((imgSrc, index) => {
-      const promptText = item.galleryPrompts && item.galleryPrompts[index] ? item.galleryPrompts[index] : '';
-      const thumbWrap = document.createElement('div');
-      thumbWrap.style.position = 'relative';
-      thumbWrap.style.width = '100%';
-      thumbWrap.style.aspectRatio = '4/3';
-      thumbWrap.style.borderRadius = '12px';
-      thumbWrap.style.borderRadius = '8px';
-      thumbWrap.style.overflow = 'hidden';
-      thumbWrap.style.cursor = 'pointer';
+      // Description
+      const descEl = document.getElementById('detail-desc');
+      if (descEl) descEl.textContent = item.fullDesc;
       
-      const thumbId = 'thumb-' + index;
-      
-      thumbWrap.innerHTML = `
-        <!-- PROMPT_IMAGEM: ${promptText} -->
-        <img id="${thumbId}" src="${imgSrc}" alt="Thumbnail ${index+1}" style="width:100%; height:100%; object-fit:cover; transition: opacity 0.2s ease; opacity:${index === 0 ? '1' : '0.6'};">
-      `;
-      thumbContainer.appendChild(thumbWrap);
+      // Main Image
+      const mainImg = document.getElementById('main-gallery-img');
+      if (mainImg) {
+        mainImg.src = item.gallery[0];
+        mainImg.alt = item.title;
+      }
 
-      // Add click event listener to change main image
-      document.getElementById(thumbId).addEventListener('click', () => {
-        mainImg.src = imgSrc;
-        // Update opacity for thumbnails
-        thumbContainer.querySelectorAll('img').forEach(t => t.style.opacity = '0.6');
-        document.getElementById(thumbId).style.opacity = '1';
-      });
-    });
+      // Thumbnails
+      const thumbContainer = document.getElementById('thumb-container');
+      if (thumbContainer) {
+        thumbContainer.innerHTML = '';
+        item.gallery.forEach((imgSrc, index) => {
+          const thumbWrap = document.createElement('div');
+          thumbWrap.className = 'thumb-wrap';
+          thumbWrap.innerHTML = `<img src="${imgSrc}" alt="Thumb" style="width:100%; height:100%; object-fit:cover; cursor:pointer; opacity:${index === 0 ? '1' : '0.6'}; transition:0.2s; border-radius:8px;">`;
+          thumbContainer.appendChild(thumbWrap);
 
-    // Pricing Logic dynamically populated
-    const type = item.type; // 'ensaio' ou 'restauracao'
-    const prices = packagePricing[type];
-    
-    const qtyContainer = document.getElementById('qty-container');
-    const qtys = Object.keys(prices); // ["7", "12", "25"]
-    
-    let qtyHtml = '';
-    qtys.forEach((q, index) => {
-      const isChecked = index === 0 ? 'checked' : '';
-      qtyHtml += `
-        <label class="qty-option">
-          <input type="radio" name="qty" value="${q}" ${isChecked}>
-          <div class="qty-label">
-            <div class="qty-number">${q}</div>
-            <div class="qty-text">Fotos</div>
-          </div>
-        </label>
-      `;
-    });
-    qtyContainer.innerHTML = qtyHtml;
+          thumbWrap.querySelector('img').addEventListener('click', (e) => {
+            if (mainImg) mainImg.src = imgSrc;
+            thumbContainer.querySelectorAll('img').forEach(t => t.style.opacity = '0.6');
+            e.target.style.opacity = '1';
+          });
+        });
+      }
 
-    const qtyInputs = document.querySelectorAll('input[name="qty"]');
-    const priceDisplay = document.getElementById('total-price');
-    const btnWpp = document.getElementById('btn-wpp-checkout');
-    const phone = "5511915101982"; 
+      // Pricing
+      const type = item.type;
+      const prices = packagePricing[type];
+      const qtyContainer = document.getElementById('qty-container');
+      const priceDisplay = document.getElementById('total-price');
+      const btnWpp = document.getElementById('btn-wpp-checkout');
 
-    function updateCheckout() {
-      const selectedQtyElement = document.querySelector('input[name="qty"]:checked');
-      if(!selectedQtyElement) return;
-      const selectedQty = selectedQtyElement.value;
-      const total = prices[selectedQty];
-      
-      // Formata moeda (R$ 00,00)
-      const formattedTotal = total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-      priceDisplay.textContent = formattedTotal;
+      if (qtyContainer && prices) {
+        const qtys = Object.keys(prices);
+        qtyContainer.innerHTML = qtys.map((q, i) => `
+          <label class="qty-option">
+            <input type="radio" name="qty" value="${q}" ${i === 0 ? 'checked' : ''}>
+            <div class="qty-label">
+              <div class="qty-number">${q}</div>
+              <div class="qty-text">Fotos</div>
+            </div>
+          </label>
+        `).join('');
 
-      // Monta Link WhatsApp - FASE FINAL FORMATO EXATO
-      const text = `Olá! Gostaria do pacote *${item.title}* com *${selectedQty}* fotos. Valor: ${formattedTotal}. Aguardo instruções.`;
-      btnWpp.href = `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
+        const updatePrice = () => {
+          const selected = document.querySelector('input[name="qty"]:checked');
+          if (selected && priceDisplay && btnWpp) {
+            const total = prices[selected.value];
+            const formatted = total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+            priceDisplay.textContent = formatted;
+            const text = `Olá! Gostaria do pacote *${item.title}* com *${selected.value}* fotos. Valor: ${formatted}.`;
+            btnWpp.href = `https://wa.me/5511915101982?text=${encodeURIComponent(text)}`;
+          }
+        };
+
+        qtyContainer.querySelectorAll('input').forEach(input => input.addEventListener('change', updatePrice));
+        updatePrice();
+      }
     }
-
-    qtyInputs.forEach(input => {
-      input.addEventListener('change', updateCheckout);
-    });
-
-    // Initialize initial values
-    updateCheckout();
   }
 });
 
-// Helper Function: Generates HTML string for a catalog card
 function createCardHTML(item, delay) {
   return `
-    <!-- PROMPT_IMAGEM: ${item.aiPrompt || ''} -->
     <div class="catalog-card reveal" style="transition-delay: ${delay}s;">
       <div class="catalog-card__img-wrap">
         <img src="${item.placeholderImg}" alt="${item.title}" loading="lazy">
