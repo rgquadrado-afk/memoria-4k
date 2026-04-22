@@ -193,10 +193,10 @@ const catalogData = {
       type: "ensaio",
       desc: "Personal branding premium para quem domina o digital.",
       fullDesc: "O ensaio indispensável para criadores de conteúdo. Focamos em um estilo de vida dinâmico.",
-      placeholderImg: "influencer_pro_1.png",
+      placeholderImg: "lider_corporativo_1.png",
       aiPrompt: "Personal branding portrait for an influencer, modern studio.",
       galleryPrompts: ["Street style content creator", "High-tech studio portrait", "Candid lifestyle trendy"],
-      gallery: ["influencer_pro_1.png", "influencer_pro_1.png", "influencer_pro_1.png"]
+      gallery: ["lider_corporativo_1.png", "lider_corporativo_2.png", "lider_corporativo_3.png"]
     }
   ],
   
