@@ -155,6 +155,24 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
+// SECRET ADMIN ACCESS — 10 clicks on footer logo
+(function() {
+  const footerIcon = document.querySelector('.footer__logo-icon');
+  if (!footerIcon) return;
+  let clicks = 0, timer = null;
+  footerIcon.style.cursor = 'default';
+  footerIcon.addEventListener('click', (e) => {
+    e.preventDefault();
+    clicks++;
+    clearTimeout(timer);
+    timer = setTimeout(() => { clicks = 0; }, 3000);
+    if (clicks >= 10) {
+      clicks = 0;
+      window.location.href = 'admin.html';
+    }
+  });
+})();
+
 function createCardHTML(item, delay) {
   return `
     <div class="catalog-card reveal" style="transition-delay: ${delay}s;">

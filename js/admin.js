@@ -51,6 +51,43 @@
     setupGenerateButton();
     setupCopyButtons();
     setupVariationTabs();
+    setupNavigation();
+    initBilling();
+  }
+
+  // ---- NAVIGATION ----
+  function setupNavigation() {
+    document.querySelectorAll('.nav-tab').forEach(tab => {
+      tab.addEventListener('click', (e) => {
+        document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+        e.target.classList.add('active');
+
+        const view = e.target.dataset.view;
+        const promptGen = document.getElementById('prompt-generator');
+        const welcome = document.getElementById('welcome-state');
+        const billing = document.getElementById('billing-panel');
+        const sidebarPrompts = document.getElementById('sidebar-prompts');
+
+        if (view === 'prompts') {
+          sidebarPrompts.style.display = 'block';
+          billing.style.display = 'none';
+          if (currentPackage) {
+            promptGen.style.display = 'block';
+            welcome.style.display = 'none';
+          } else {
+            promptGen.style.display = 'none';
+            welcome.style.display = 'block';
+          }
+        } else if (view === 'billing') {
+          sidebarPrompts.style.display = 'none';
+          promptGen.style.display = 'none';
+          welcome.style.display = 'none';
+          billing.style.display = 'block';
+          renderBillingTable();
+          updateBillingSummary();
+        }
+      });
+    });
   }
 
   // ---- PACKAGE LIST ----
@@ -208,6 +245,137 @@
       feedback.style.display = 'block';
       setTimeout(() => { feedback.style.display = 'none'; }, 2000);
     });
+  }
+
+  // ---- BILLING SYSTEM ----
+  let salesData = JSON.parse(localStorage.getItem('memoria4k_sales') || '[]');
+
+  function initBilling() {
+    // Populate packages dropdown
+    const select = document.getElementById('sale-package');
+    select.innerHTML = '<option value="">-- Selecione --</option>' + 
+      getAllPackages().map(p => `<option value="${p.id}">${p.title}</option>`).join('');
+
+    // Default date to today
+    document.getElementById('sale-date').valueAsDate = new Date();
+
+    // Add sale listener
+    document.getElementById('btn-add-sale').addEventListener('click', addSale);
+  }
+
+  function addSale() {
+    const client = document.getElementById('sale-client').value;
+    const pkgId = document.getElementById('sale-package').value;
+    const qty = document.getElementById('sale-qty').value;
+    const valueStr = document.getElementById('sale-value').value;
+    const status = document.getElementById('sale-status').value;
+    const dateInput = document.getElementById('sale-date').value;
+
+    if (!client || !pkgId || !valueStr || !dateInput) {
+      alert("Preencha os campos obrigatórios (Cliente, Pacote, Valor, Data).");
+      return;
+    }
+
+    const pkg = getPackageById(pkgId);
+    if (!pkg) return;
+
+    const newSale = {
+      id: Date.now().toString(),
+      client,
+      packageTitle: pkg.title,
+      qty,
+      value: parseFloat(valueStr),
+      status,
+      date: dateInput
+    };
+
+    salesData.push(newSale);
+    // Sort descending by date
+    salesData.sort((a, b) => new Date(b.date) - new Date(a.date));
+    saveSales();
+    renderBillingTable();
+    updateBillingSummary();
+
+    // Reset some fields
+    document.getElementById('sale-client').value = '';
+    document.getElementById('sale-value').value = '';
+  }
+
+  function deleteSale(id) {
+    if (confirm("Deseja realmente excluir esta venda?")) {
+      salesData = salesData.filter(s => s.id !== id);
+      saveSales();
+      renderBillingTable();
+      updateBillingSummary();
+    }
+  }
+
+  function saveSales() {
+    localStorage.setItem('memoria4k_sales', JSON.stringify(salesData));
+  }
+
+  function renderBillingTable() {
+    const tbody = document.getElementById('sales-table-body');
+    const noSales = document.getElementById('no-sales');
+
+    if (salesData.length === 0) {
+      tbody.innerHTML = '';
+      noSales.style.display = 'block';
+      return;
+    }
+    noSales.style.display = 'none';
+
+    tbody.innerHTML = salesData.map(s => {
+      const dateParts = s.date.split('-');
+      const formattedDate = `${dateParts[2]}/${dateParts[1]}/${dateParts[0]}`;
+      const formattedValue = s.value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+      
+      const statusLabels = {
+        'pago': '✅ Pago', 'pendente': '⏳ Pendente', 
+        'produzindo': '🎨 Produzindo', 'entregue': '📦 Entregue'
+      };
+
+      return `
+        <tr>
+          <td>${formattedDate}</td>
+          <td><b>${s.client}</b></td>
+          <td>${s.packageTitle}</td>
+          <td>${s.qty}</td>
+          <td style="color:var(--admin-success); font-weight:600">${formattedValue}</td>
+          <td><span class="status-badge ${s.status}">${statusLabels[s.status]}</span></td>
+          <td><button class="btn-delete" data-id="${s.id}" title="Excluir">✕</button></td>
+        </tr>
+      `;
+    }).join('');
+
+    tbody.querySelectorAll('.btn-delete').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        deleteSale(e.target.dataset.id);
+      });
+    });
+  }
+
+  function updateBillingSummary() {
+    const todayStr = new Date().toISOString().split('T')[0];
+    const thisMonthStr = todayStr.substring(0, 7); // YYYY-MM
+
+    let totalToday = 0;
+    let totalMonth = 0;
+    let totalAll = 0;
+
+    salesData.forEach(s => {
+      if (s.status === 'pago' || s.status === 'entregue') {
+        const val = s.value;
+        totalAll += val;
+        if (s.date === todayStr) totalToday += val;
+        if (s.date.startsWith(thisMonthStr)) totalMonth += val;
+      }
+    });
+
+    document.getElementById('bill-today').textContent = totalToday.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    document.getElementById('bill-month').textContent = totalMonth.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    document.getElementById('bill-total').textContent = totalAll.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    document.getElementById('bill-count').textContent = salesData.length;
   }
 
 })();

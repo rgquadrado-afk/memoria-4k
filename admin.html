@@ -41,19 +41,26 @@
     </header>
 
     <div class="admin-layout">
-      <!-- SIDEBAR: Package List -->
+      <!-- SIDEBAR -->
       <aside class="admin-sidebar">
         <div class="sidebar-section">
-          <h3 class="sidebar-title">Pacotes</h3>
-          <div class="sidebar-filters">
-            <button class="filter-btn active" data-filter="all">Todos <span class="filter-count" id="count-all">19</span></button>
-            <button class="filter-btn" data-filter="tematicos">Temáticos <span class="filter-count" id="count-tematicos">12</span></button>
-            <button class="filter-btn" data-filter="lifestyle">Elite <span class="filter-count" id="count-lifestyle">4</span></button>
-            <button class="filter-btn" data-filter="restauracao">Restauração <span class="filter-count" id="count-restauracao">3</span></button>
+          <h3 class="sidebar-title">Navegação</h3>
+          <div class="sidebar-nav">
+            <button class="nav-tab active" data-view="prompts">⚡ Motor de Prompts</button>
+            <button class="nav-tab" data-view="billing">💰 Faturamento</button>
           </div>
         </div>
-        <div class="package-list" id="package-list">
-          <!-- Populated by JS -->
+        <div id="sidebar-prompts">
+          <div class="sidebar-section">
+            <h3 class="sidebar-title">Pacotes</h3>
+            <div class="sidebar-filters">
+              <button class="filter-btn active" data-filter="all">Todos <span class="filter-count" id="count-all">19</span></button>
+              <button class="filter-btn" data-filter="tematicos">Temáticos <span class="filter-count" id="count-tematicos">12</span></button>
+              <button class="filter-btn" data-filter="lifestyle">Elite <span class="filter-count" id="count-lifestyle">4</span></button>
+              <button class="filter-btn" data-filter="restauracao">Restauração <span class="filter-count" id="count-restauracao">3</span></button>
+            </div>
+          </div>
+          <div class="package-list" id="package-list"></div>
         </div>
       </aside>
 
@@ -77,6 +84,97 @@
               <div class="stat-number">Gemini</div>
               <div class="stat-label">Motor de IA</div>
             </div>
+          </div>
+        </div>
+
+        <!-- BILLING PANEL -->
+        <div id="billing-panel" class="billing-panel" style="display:none;">
+          <div class="billing-header">
+            <h2 class="pkg-title">💰 Controle de Faturamento</h2>
+            <p class="pkg-desc">Registre vendas e acompanhe a receita do Memória 4K.</p>
+          </div>
+
+          <!-- Summary Cards -->
+          <div class="billing-summary">
+            <div class="billing-card">
+              <div class="billing-card__label">Hoje</div>
+              <div class="billing-card__value" id="bill-today">R$ 0,00</div>
+            </div>
+            <div class="billing-card">
+              <div class="billing-card__label">Este Mês</div>
+              <div class="billing-card__value" id="bill-month">R$ 0,00</div>
+            </div>
+            <div class="billing-card">
+              <div class="billing-card__label">Total Geral</div>
+              <div class="billing-card__value accent" id="bill-total">R$ 0,00</div>
+            </div>
+            <div class="billing-card">
+              <div class="billing-card__label">Pedidos</div>
+              <div class="billing-card__value" id="bill-count">0</div>
+            </div>
+          </div>
+
+          <!-- Add Sale Form -->
+          <div class="glass-panel">
+            <h3 class="panel-title">➕ Registrar Venda</h3>
+            <div class="form-grid">
+              <div class="form-field">
+                <label for="sale-client">Cliente</label>
+                <input type="text" id="sale-client" placeholder="Nome do cliente">
+              </div>
+              <div class="form-field">
+                <label for="sale-package">Pacote</label>
+                <select id="sale-package"></select>
+              </div>
+              <div class="form-field">
+                <label for="sale-qty">Qtd. Fotos</label>
+                <select id="sale-qty">
+                  <option value="7">7 fotos</option>
+                  <option value="12">12 fotos</option>
+                  <option value="25">25 fotos</option>
+                </select>
+              </div>
+              <div class="form-field">
+                <label for="sale-value">Valor (R$)</label>
+                <input type="number" id="sale-value" placeholder="0.00" step="0.01">
+              </div>
+              <div class="form-field">
+                <label for="sale-status">Status</label>
+                <select id="sale-status">
+                  <option value="pago">✅ Pago</option>
+                  <option value="pendente">⏳ Pendente</option>
+                  <option value="produzindo">🎨 Produzindo</option>
+                  <option value="entregue">📦 Entregue</option>
+                </select>
+              </div>
+              <div class="form-field">
+                <label for="sale-date">Data</label>
+                <input type="date" id="sale-date">
+              </div>
+            </div>
+            <button id="btn-add-sale" class="btn-generate">💾 Registrar Venda</button>
+          </div>
+
+          <!-- Sales Table -->
+          <div class="glass-panel">
+            <h3 class="panel-title">📋 Histórico de Vendas</h3>
+            <div class="table-wrapper">
+              <table class="sales-table">
+                <thead>
+                  <tr>
+                    <th>Data</th>
+                    <th>Cliente</th>
+                    <th>Pacote</th>
+                    <th>Fotos</th>
+                    <th>Valor</th>
+                    <th>Status</th>
+                    <th>Ações</th>
+                  </tr>
+                </thead>
+                <tbody id="sales-table-body"></tbody>
+              </table>
+            </div>
+            <div id="no-sales" class="no-sales">Nenhuma venda registrada ainda.</div>
           </div>
         </div>
 
