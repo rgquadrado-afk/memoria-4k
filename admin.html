@@ -3,78 +3,170 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Oficina Memória 4K — Admin</title>
+  <title>Oficina Memória 4K — Painel de Produção</title>
   <link rel="icon" type="image/png" href="favicon.png">
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-  <style>
-    :root { --dark-bg: #0F1A15; --white: #FFFFFF; --terracotta: #C26A40; --amber: #D4885A; --forest-deep: #1C3F3A; }
-    body { font-family: 'DM Sans', sans-serif; background: var(--dark-bg); color: var(--white); margin: 0; padding: 40px; }
-    .admin-container { max-width: 900px; margin: 0 auto; }
-    .glass-card { background: rgba(255,255,255,0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 40px; margin-bottom: 24px; text-align: center; }
-    h1 { font-weight: 500; letter-spacing: -1px; }
-    input { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2); background: rgba(0,0,0,0.3); color: white; margin-bottom: 20px; font-size: 16px; box-sizing: border-box; }
-    button { background: var(--terracotta); color: white; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; font-weight: 600; width: 100%; font-size: 16px; }
-    table { width: 100%; border-collapse: collapse; margin-top: 40px; }
-    th, td { padding: 12px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.1); font-size: 14px; }
-    th { color: var(--amber); text-transform: uppercase; }
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/admin.css">
 </head>
 <body>
-  <div class="admin-container">
-    <div class="glass-card">
-      <h1>Oficina <em>Memória 4K</em></h1>
-      <p>Gerenciamento de Ativos e Prompts de IA.</p>
-      
-      <div id="login-form">
-        <input type="password" id="admin-pass" placeholder="Senha de acesso">
-        <button id="login-btn">Entrar na Oficina</button>
+  <!-- LOGIN SCREEN -->
+  <div id="login-screen" class="login-screen">
+    <div class="login-card">
+      <div class="login-logo">
+        <div class="login-logo__icon">✦</div>
+        <h1>Oficina <em>Memória 4K</em></h1>
+        <p class="login-subtitle">Painel de Produção & Motor de Prompts IA</p>
       </div>
-
-      <div id="admin-panel" style="display:none;">
-        <table>
-          <thead>
-            <tr>
-              <th>Pacote</th>
-              <th>Status Imagens</th>
-              <th>Prompt Base</th>
-            </tr>
-          </thead>
-          <tbody id="admin-table-body">
-            <!-- Populado via JS -->
-          </tbody>
-        </table>
+      <div class="login-form">
+        <label for="admin-pass">Senha de Acesso</label>
+        <input type="password" id="admin-pass" placeholder="••••••••••" autocomplete="off">
+        <button id="login-btn" class="btn-login">Entrar na Oficina</button>
+        <p id="login-error" class="login-error" style="display:none;">Acesso negado. Senha incorreta.</p>
       </div>
     </div>
   </div>
 
+  <!-- ADMIN DASHBOARD -->
+  <div id="admin-dashboard" class="admin-dashboard" style="display:none;">
+    <!-- Top Bar -->
+    <header class="admin-topbar">
+      <div class="admin-topbar__left">
+        <div class="admin-logo-icon">✦</div>
+        <span class="admin-logo-text">Oficina <em>Memória 4K</em></span>
+      </div>
+      <div class="admin-topbar__right">
+        <span class="admin-status-badge">● Motor Ativo</span>
+        <button id="logout-btn" class="btn-logout">Sair</button>
+      </div>
+    </header>
+
+    <div class="admin-layout">
+      <!-- SIDEBAR: Package List -->
+      <aside class="admin-sidebar">
+        <div class="sidebar-section">
+          <h3 class="sidebar-title">Pacotes</h3>
+          <div class="sidebar-filters">
+            <button class="filter-btn active" data-filter="all">Todos <span class="filter-count" id="count-all">19</span></button>
+            <button class="filter-btn" data-filter="tematicos">Temáticos <span class="filter-count" id="count-tematicos">12</span></button>
+            <button class="filter-btn" data-filter="lifestyle">Elite <span class="filter-count" id="count-lifestyle">4</span></button>
+            <button class="filter-btn" data-filter="restauracao">Restauração <span class="filter-count" id="count-restauracao">3</span></button>
+          </div>
+        </div>
+        <div class="package-list" id="package-list">
+          <!-- Populated by JS -->
+        </div>
+      </aside>
+
+      <!-- MAIN PANEL -->
+      <main class="admin-main">
+        <!-- Welcome State -->
+        <div id="welcome-state" class="welcome-state">
+          <div class="welcome-icon">🎯</div>
+          <h2>Selecione um pacote</h2>
+          <p>Escolha um pacote na lista à esquerda para gerar prompts personalizados para o cliente.</p>
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-number" id="stat-total">19</div>
+              <div class="stat-label">Pacotes Ativos</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number">Hasselblad</div>
+              <div class="stat-label">X2D 100C Default</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number">Gemini</div>
+              <div class="stat-label">Motor de IA</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Prompt Generator -->
+        <div id="prompt-generator" class="prompt-generator" style="display:none;">
+          <!-- Package Header -->
+          <div class="pkg-header">
+            <div>
+              <span class="pkg-tag" id="pkg-tag"></span>
+              <h2 class="pkg-title" id="pkg-title"></h2>
+              <p class="pkg-desc" id="pkg-desc"></p>
+            </div>
+            <div class="pkg-status" id="pkg-status">● Ativo</div>
+          </div>
+
+          <!-- Client Data Input -->
+          <div class="client-form glass-panel">
+            <h3 class="panel-title">📝 Dados do Cliente</h3>
+            <div class="form-grid">
+              <div class="form-field">
+                <label for="client-name">Nome do Cliente</label>
+                <input type="text" id="client-name" placeholder="Ex: Maria Silva">
+              </div>
+              <div class="form-field">
+                <label for="client-gender">Gênero</label>
+                <select id="client-gender">
+                  <option value="female">Feminino</option>
+                  <option value="male">Masculino</option>
+                  <option value="non-binary">Não-binário</option>
+                </select>
+              </div>
+              <div class="form-field">
+                <label for="client-ethnicity">Etnia / Aparência</label>
+                <input type="text" id="client-ethnicity" placeholder="Ex: latina, pele morena, cabelo cacheado">
+              </div>
+              <div class="form-field full-width">
+                <label for="client-notes">Observações Especiais</label>
+                <input type="text" id="client-notes" placeholder="Ex: usa óculos, quer fundo mais claro, preferência de roupa...">
+              </div>
+            </div>
+            <button id="btn-generate" class="btn-generate">⚡ Gerar Prompt Otimizado</button>
+          </div>
+
+          <!-- Variation Selector -->
+          <div class="variation-selector glass-panel">
+            <h3 class="panel-title">🎨 Variação da Imagem</h3>
+            <div class="variation-tabs" id="variation-tabs">
+              <button class="var-tab active" data-var="0">📸 Principal</button>
+              <button class="var-tab" data-var="1">🖼 Variação 2</button>
+              <button class="var-tab" data-var="2">🖼 Variação 3</button>
+            </div>
+          </div>
+
+          <!-- Generated Prompt Output -->
+          <div class="prompt-output glass-panel" id="prompt-output" style="display:none;">
+            <div class="prompt-header">
+              <h3 class="panel-title">🤖 Prompt Gerado — Gemini / Imagen</h3>
+              <div class="prompt-actions">
+                <button id="btn-copy-compiled" class="btn-copy" title="Copiar prompt compilado">📋 Copiar Prompt</button>
+                <button id="btn-copy-json" class="btn-copy btn-copy-alt" title="Copiar JSON completo">{ } Copiar JSON</button>
+              </div>
+            </div>
+
+            <!-- Compiled Prompt -->
+            <div class="prompt-section">
+              <label class="prompt-label">PROMPT COMPILADO (Cole diretamente no Gemini)</label>
+              <div class="prompt-text" id="compiled-prompt"></div>
+            </div>
+
+            <!-- Negative Prompt -->
+            <div class="prompt-section">
+              <label class="prompt-label">NEGATIVE PROMPT</label>
+              <div class="prompt-text prompt-negative" id="negative-prompt"></div>
+            </div>
+
+            <!-- JSON Structure -->
+            <div class="prompt-section">
+              <label class="prompt-label">ESTRUTURA JSON COMPLETA</label>
+              <pre class="prompt-json" id="json-prompt"></pre>
+            </div>
+
+            <!-- Copy Feedback -->
+            <div id="copy-feedback" class="copy-feedback" style="display:none;">✓ Copiado!</div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
   <script src="js/data.js"></script>
-  <script>
-    const loginBtn = document.getElementById('login-btn');
-    const adminPass = document.getElementById('admin-pass');
-    const loginForm = document.getElementById('login-form');
-    const adminPanel = document.getElementById('admin-panel');
-    const tableBody = document.getElementById('admin-table-body');
-
-    loginBtn.addEventListener('click', () => {
-      if (adminPass.value === 'memoria4k2026') {
-        loginForm.style.display = 'none';
-        adminPanel.style.display = 'block';
-        loadAdmin();
-      } else {
-        alert('Acesso negado.');
-      }
-    });
-
-    function loadAdmin() {
-      const all = [...catalogData.tematicos, ...catalogData.lifestyle, ...catalogData.restauracao];
-      tableBody.innerHTML = all.map(p => `
-        <tr>
-          <td>${p.title}</td>
-          <td><span style="color: ${p.gallery.includes(p.placeholderImg) ? '#ff9800' : '#4caf50'}">${p.gallery.includes(p.placeholderImg) ? 'Pendente' : 'Completo'}</span></td>
-          <td style="font-size: 10px; color: rgba(255,255,255,0.5);">${p.aiPrompt.substring(0, 50)}...</td>
-        </tr>
-      `).join('');
-    }
-  </script>
+  <script src="js/admin.js"></script>
 </body>
 </html>
