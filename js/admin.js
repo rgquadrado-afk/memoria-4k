@@ -96,6 +96,7 @@
     let packages = [];
 
     if (filter === 'all' || filter === 'tematicos') packages.push(...catalogData.tematicos.map(p => ({...p, category: 'tematicos'})));
+    if (filter === 'all' || filter === 'familia') packages.push(...catalogData.familia.map(p => ({...p, category: 'familia'})));
     if (filter === 'all' || filter === 'lifestyle') packages.push(...catalogData.lifestyle.map(p => ({...p, category: 'lifestyle'})));
     if (filter === 'all' || filter === 'restauracao') packages.push(...catalogData.restauracao.map(p => ({...p, category: 'restauracao'})));
 
@@ -121,7 +122,7 @@
   }
 
   function getCategoryLabel(cat) {
-    const labels = { tematicos: 'Temático', lifestyle: 'Elite', restauracao: 'Restauração' };
+    const labels = { tematicos: 'Temático', familia: 'Família', lifestyle: 'Elite', restauracao: 'Restauração' };
     return labels[cat] || cat;
   }
 

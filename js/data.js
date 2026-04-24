@@ -287,7 +287,9 @@ const catalogData = {
         { shot_type: "hero portrait", description: "close-up after the run, goggles on forehead, snow in hair, triumphant grin, mountain backdrop" }
       ]
     }
-    ,
+  ],
+
+  familia: [
     {
       id: "newborn_4k", title: "Ensaio Newborn 4K", tag: "👶 Delicadeza", type: "ensaio",
       desc: "A delicadeza dos primeiros dias em um ensaio profissional sem sair de casa.",
@@ -523,10 +525,10 @@ const packagePricing = {
 };
 
 function getPackageById(id) {
-  const all = [...catalogData.tematicos, ...catalogData.lifestyle, ...catalogData.restauracao];
+  const all = [...catalogData.tematicos, ...catalogData.familia, ...catalogData.lifestyle, ...catalogData.restauracao];
   return all.find(item => item.id === id);
 }
 
 function getAllPackages() {
-  return [...catalogData.tematicos, ...catalogData.lifestyle, ...catalogData.restauracao];
+  return [...catalogData.tematicos, ...catalogData.familia, ...catalogData.lifestyle, ...catalogData.restauracao];
 }

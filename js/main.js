@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   // 1. CATALOG RENDERING (If we are on index.html)
   const gridTematicos = document.getElementById('grid-tematicos');
+  const gridFamilia = document.getElementById('grid-familia');
   const gridLifestyle = document.getElementById('grid-lifestyle');
   const gridRestauracao = document.getElementById('grid-restauracao');
 
@@ -10,6 +11,14 @@ document.addEventListener("DOMContentLoaded", () => {
       catalogData.tematicos.forEach((item, index) => {
         const delay = (index % 3) * 0.1;
         gridTematicos.innerHTML += createCardHTML(item, delay);
+      });
+    }
+
+    if (gridFamilia) {
+      gridFamilia.innerHTML = '';
+      catalogData.familia.forEach((item, index) => {
+        const delay = (index % 3) * 0.1;
+        gridFamilia.innerHTML += createCardHTML(item, delay);
       });
     }
 
@@ -77,13 +86,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const heroBg = document.getElementById('hero-slider');
   if (heroBg) {
     const images = [
+      'familia_real_1.png',
       'hero.png',
+      'primeira_infancia_1.png',
       'tapete_vermelho_1.png',
       'paris_romance_1.png',
       'noite_gala_1.png',
       'cyberpunk_neon_1.png',
-      'safari_aventura_1.png',
-      'estudio_vintage_1.png'
+      'safari_aventura_1.png'
     ];
 
     heroBg.innerHTML = '';
