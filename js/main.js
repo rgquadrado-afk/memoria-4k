@@ -73,6 +73,39 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // HERO CAROUSEL
+  const heroBg = document.getElementById('hero-slider');
+  if (heroBg) {
+    const images = [
+      'hero.png',
+      'tapete_vermelho_1.png',
+      'paris_romance_1.png',
+      'noite_gala_1.png',
+      'cyberpunk_neon_1.png',
+      'safari_aventura_1.png',
+      'estudio_vintage_1.png'
+    ];
+
+    heroBg.innerHTML = '';
+    images.forEach((src, idx) => {
+      const img = document.createElement('img');
+      img.src = src;
+      img.className = `hero-slide ${idx === 0 ? 'active' : ''}`;
+      img.alt = 'Hero Background';
+      heroBg.appendChild(img);
+    });
+
+    let currentSlide = 0;
+    const slides = heroBg.querySelectorAll('.hero-slide');
+    if (slides.length > 1) {
+      setInterval(() => {
+        slides[currentSlide].classList.remove('active');
+        currentSlide = (currentSlide + 1) % slides.length;
+        slides[currentSlide].classList.add('active');
+      }, 4000);
+    }
+  }
+
   // 3. DETAILS PAGE RENDERING
   const detailTitle = document.getElementById('detail-title');
   if (detailTitle && typeof getPackageById !== 'undefined') {

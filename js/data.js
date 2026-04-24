@@ -287,6 +287,87 @@ const catalogData = {
         { shot_type: "hero portrait", description: "close-up after the run, goggles on forehead, snow in hair, triumphant grin, mountain backdrop" }
       ]
     }
+    ,
+    {
+      id: "newborn_4k", title: "Ensaio Newborn 4K", tag: "👶 Delicadeza", type: "ensaio",
+      desc: "A delicadeza dos primeiros dias em um ensaio profissional sem sair de casa.",
+      fullDesc: "Recrie a atmosfera mágica de um ensaio newborn de estúdio sem precisar expor seu bebê a deslocamentos ou ambientes externos. Nossa IA compõe cenários aconchegantes com mantas de tricô, cestinhas artesanais, iluminação difusa e paletas de cores suaves — tudo pensado para eternizar a pureza dos primeiros dias de vida. Ideal para presentear avós ou guardar para sempre.",
+      placeholderImg: "newborn_4k_1.png",
+      gallery: ["newborn_4k_1.png", "newborn_4k_2.png", "newborn_4k_3.png"],
+      status: "active",
+      promptJSON: {
+        camera: { type: "Hasselblad X2D 100C", lens: "XCD 80mm f/1.9", shot_type: "newborn portrait", depth_of_field: "ultra-shallow dreamy bokeh f/1.9", focus: "eyes and tiny hands" },
+        scene: { setting: "Cozy artisanal newborn studio setting, wicker basket with soft knitted baby blankets in pastel tones, fluffy textures, natural organic environment", time_of_day: "soft morning light", weather_mood: "peaceful, warm, tender" },
+        lighting: { type: "large window diffused natural light with soft reflector fill", quality: "ethereal, gentle, no harsh shadows, Anne Geddes inspired", color_temperature: "warm white 4800K, skin-flattering" },
+        subject: { attire: "wrapped delicately in an organic cotton swaddle or soft knit wrap, minimal clothing, natural", pose: "sleeping peacefully curled up, tiny hands near face, classic newborn curve", expression: "peaceful slumber, pure innocence, gentle breathing" },
+        style: { reference: "Award-winning newborn photography, fine art baby portrait", color_grading: "pastel palette, creamy skin tones, lifted airy shadows, very soft contrast", post_processing: "subtle skin softening preserving natural baby fuzz, velvety texture enhancement, dreamy vignette" }
+      },
+      galleryVariations: [
+        { shot_type: "basket close-up", description: "sleeping in a rustic basket lined with soft wool, overhead angle, tiny toes visible" },
+        { shot_type: "macro detail", description: "extreme close-up on tiny curled fingers clutching a soft blanket edge, dreamy bokeh" },
+        { shot_type: "ethereal portrait", description: "profile shot beautifully wrapped, soft backlight creating a halo on baby fuzz, serene expression" }
+      ]
+    },
+    {
+      id: "aniversario_magico", title: "Aniversário Mágico", tag: "🎈 Festa", type: "ensaio",
+      desc: "A festa dos sonhos em detalhes cinematográficos. Balões, confetes e sorrisos.",
+      fullDesc: "Transforme o aniversário do seu filho em um ensaio que parece cena de filme. Nossa IA cria o cenário perfeito com tema personalizado — castelos, unicórnios, super-heróis — combinando iluminação mágica de bokeh, textura de confetes flutuando e a expressão genuína da criança assoprando as velinhas. Um retrato que vai muito além da foto de celular.",
+      placeholderImg: "aniversario_magico_1.png",
+      gallery: ["aniversario_magico_1.png", "aniversario_magico_2.png", "aniversario_magico_3.png"],
+      status: "active",
+      promptJSON: {
+        camera: { type: "Hasselblad X2D 100C", lens: "XCD 65mm f/2.8", shot_type: "child celebration portrait", depth_of_field: "medium bokeh turning confetti into colorful orbs", focus: "joyful face and action" },
+        scene: { setting: "Magical child's birthday celebration set, premium colorful balloon garlands, elegant themed birthday cake, falling confetti, dream-like party atmosphere", time_of_day: "golden hour indoor celebration", weather_mood: "joyful, energetic, vibrant" },
+        lighting: { type: "bright warm ambient mixed with sparkling string lights", quality: "cinematic event, vibrant and happy", color_temperature: "warm and inviting 4000K, colorful ambient reflections" },
+        subject: { attire: "adorable premium birthday outfit, cute party hat or flower crown, beautifully styled", pose: "clapping hands, blowing out a birthday candle, or reaching for falling confetti, candid action", expression: "pure unbridled joy, wide-eyed wonder, massive genuine smile" },
+        style: { reference: "High-end children fashion editorial, luxury event photography", color_grading: "vibrant saturated colors, bright whites, warm joyful skin tones, celebratory palette", post_processing: "enhanced confetti sparkle, glowing candles, colorful bokeh, crisp details on eyes and cake" }
+      },
+      galleryVariations: [
+        { shot_type: "candle moment", description: "close-up blowing out a single glowing candle on an intricate cake, magical light on face" },
+        { shot_type: "confetti joy", description: "mid-action portrait with hands up, laughing loudly as colorful confetti falls all around" },
+        { shot_type: "cake smash", description: "candid joyful moment with a bit of frosting on the nose, sitting among premium balloons" }
+      ]
+    },
+    {
+      id: "familia_real", title: "Família Real", tag: "👑 Nostalgia", type: "ensaio",
+      desc: "Sua família retratada como a realeza. Ensaio em cenário de palácio.",
+      fullDesc: "Vista sua família com trajes de época e entre em um cenário digno de palácio. Nossa IA posiciona todos em composições clássicas de pintura renascentista, com iluminação dramática de estúdio, tapeçarias ricas ao fundo e olhares que transmitem união e legado. Uma herança visual para gerações. Perfeito para presentear avós ou celebrar um marco familiar.",
+      placeholderImg: "familia_real_1.png",
+      gallery: ["familia_real_1.png", "familia_real_2.png", "familia_real_3.png"],
+      status: "active",
+      promptJSON: {
+        camera: { type: "Hasselblad X2D 100C", lens: "XCD 45mm f/4", shot_type: "classic group portrait", depth_of_field: "deep focus f/8 to capture entire family sharply", focus: "faces of the royal family members" },
+        scene: { setting: "Magnificent European Renaissance palace room, opulent tapestries, grand stone fireplace, gilded frames, rich velvet drapery", time_of_day: "evening in a grand hall", weather_mood: "regal, timeless, commanding atmosphere" },
+        lighting: { type: "classic Rembrandt multi-point painting light, warm chandelier glow overhead", quality: "Masterpiece oil painting meets 8K photography", color_temperature: "warm golden 3200K echoing antique palace lighting" },
+        subject: { attire: "highly detailed Renaissance or Victorian-inspired royal attire, elegant silk and velvet fabrics, subtle crowns, rich jewel tones", pose: "aristocratic group composition, seated parents in carved chairs with children standing elegantly at sides", expression: "noble, unified, quiet pride, a legacy of strength and love" },
+        style: { reference: "Classical Renaissance portraiture, Annie Leibovitz Royal Family Vanity Fair shoot", color_grading: "rich regal tones, deep crimsons and golds, subtle oil painting texture emulation, dramatic shadows", post_processing: "enhanced fabric textures (brocade, velvet), glowing warm highlights, classical vignette, timeless museum quality" }
+      },
+      galleryVariations: [
+        { shot_type: "grand composition", description: "full family positioned with perfect classical geometry in the palace hall, majestic presence" },
+        { shot_type: "regal close-up", description: "tighter shot focusing on faces and shoulders, intricate clothing details, strong legacy eye contact" },
+        { shot_type: "dynasty moment", description: "candid regal moment, perhaps parent looking lovingly at child within the formal setting" }
+      ]
+    },
+    {
+      id: "primeira_infancia", title: "Primeira Infância", tag: "🌿 Crescimento", type: "ensaio",
+      desc: "Os marcos do crescimento em imagens que emocionam. Tudo em cinema.",
+      fullDesc: "A infância passa voando, mas as imagens ficam. Este ensaio captura os momentos mais preciosos do desenvolvimento: o primeiro sorriso, o sentar sozinho, as mãozinhas segurando o dedo do pai, os primeiros passos no jardim. Nossa IA compõe cenários lúdicos com luz natural, texturas orgânicas e a doçura que só essa fase tem.",
+      placeholderImg: "primeira_infancia_1.png",
+      gallery: ["primeira_infancia_1.png", "primeira_infancia_2.png", "primeira_infancia_3.png"],
+      status: "active",
+      promptJSON: {
+        camera: { type: "Hasselblad X2D 100C", lens: "XCD 90mm f/2.5", shot_type: "milestone childhood portrait", depth_of_field: "creamy smooth bokeh f/2.5", focus: "child's eyes and expressive gesture" },
+        scene: { setting: "Beautiful sunlit botanical garden or light-filled rustic indoor playroom with organic wooden toys, soft green grass or woven rugs", time_of_day: "late afternoon golden hour", weather_mood: "warm, sun-kissed, gentle breeze, nostalgic" },
+        lighting: { type: "glowing backlight from the sun filtering through leaves, soft bounce fill on face", quality: "cinematic editorial, glowing and tender", color_temperature: "warm and nostalgic 5000K golden light" },
+        subject: { attire: "adorable vintage-inspired clothing, linen romper or cotton dress, bare feet, natural organic style", pose: "sitting on soft grass examining a small flower, or taking wobbly first steps, natural unposed discovery", expression: "curiosity, genuine toddler joy, bright eyes exploring the world" },
+        style: { reference: "High-end family lifestyle photography, organic modern aesthetic", color_grading: "soft film emulation reminiscent of Kodak Portra, earthy greens, warm skin tones, luminous highlights", post_processing: "soft glowing rim light, subtle film grain, enhancement of gentle environmental details, magical innocence" }
+      },
+      galleryVariations: [
+        { shot_type: "discovery moment", description: "toddler sitting in sunlit grass holding a daisy with two hands, intense curiosity" },
+        { shot_type: "first steps", description: "wobbly walking pose reaching towards camera, glowing backlight, huge proud smile" },
+        { shot_type: "joyful laugh", description: "close-up portrait laughing uncontrollably, messy hair in the wind, pure infectious happiness" }
+      ]
+    }
   ],
 
   lifestyle: [

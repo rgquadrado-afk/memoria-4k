@@ -296,6 +296,29 @@ img {
   object-position: center right;
 }
 
+.hero-slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out, transform 8s linear;
+  transform: scale(1.0);
+}
+
+.hero-slide.active {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+  .hero-slide {
+    object-position: center top;
+  }
+}
+
 .hero__bg::after {
   content: '';
   position: absolute;
@@ -452,6 +475,7 @@ img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center top;
   transition: transform 0.5s ease;
 }
 
@@ -606,6 +630,7 @@ img {
   aspect-ratio: 4/3;
   border-radius: 16px;
   object-fit: cover;
+  object-position: center top;
   background: var(--dark-bg);
 }
 
