@@ -120,7 +120,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const detailTitle = document.getElementById('detail-title');
   if (detailTitle && typeof getPackageById !== 'undefined') {
     const params = new URLSearchParams(window.location.search);
-    const pacoteId = params.get('pacote');
+    const pacoteId = params.get('id');
     const item = getPackageById(pacoteId);
 
     if (item) {
@@ -225,7 +225,7 @@ function createCardHTML(item, delay) {
       <div class="catalog-card__body">
         <h3 class="catalog-card__title">${item.title}</h3>
         <p class="catalog-card__desc">${item.desc}</p>
-        <a href="detalhe.html?pacote=${item.id}" class="catalog-card__btn">Ver detalhes →</a>
+        <a href="detalhe.html?id=${item.id}" class="catalog-card__btn">Ver detalhes →</a>
       </div>
     </div>
   `;

@@ -18,6 +18,29 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css?v=revisao_final_2026">
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18123932698"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-18123932698');
+
+    // Rastreamento automático de cliques no WhatsApp (PMax)
+    document.addEventListener('DOMContentLoaded', function() {
+      document.body.addEventListener('click', function(e) {
+        let target = e.target.closest('a');
+        if (target && target.href && target.href.includes('wa.me')) {
+          gtag('event', 'conversion', {
+            'send_to': 'AW-18123932698',
+            'event_category': 'Contato',
+            'event_label': 'Clique WhatsApp'
+          });
+        }
+      });
+    });
+  </script>
 </head>
 <body id="inicio">
   <nav class="navbar" id="navbar">
@@ -178,7 +201,7 @@
           <span class="cta-badge">✓ Entrega em 24h</span>
           <span class="cta-badge">✓ Pagamento Único</span>
         </div>
-        <a href="https://wa.me/5511915101982" target="_blank" rel="noopener" class="cta-final__button">
+        <a href="https://wa.me/5511915101982" target="_blank" rel="noopener noreferrer" class="cta-final__button">
           Quero meu orçamento agora
         </a>
       </div>

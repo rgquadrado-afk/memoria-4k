@@ -5,9 +5,8 @@
 (function() {
   'use strict';
 
-  // SHA-256 hash da senha "Gui11052003"
-  const PASS_HASH = "a]G11052003"; // Simplified check
-  const CORRECT_PASS = "Gui11052003";
+  // Senha de Acesso
+  const CORRECT_PASS = "memoria4k2026";
 
   // State
   let currentPackage = null;
